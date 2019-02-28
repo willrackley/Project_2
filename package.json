@@ -1,0 +1,25 @@
+{
+  "name": "Project_2",
+  "version": "1.0.0",
+  "description": "Project 2 GA Tech Bootcamp group project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willrackley/Project_2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willrackley/Project_2/issues"
+  },
+  "homepage": "https://github.com/willrackley/Project_2#readme",
+  "dependencies": {
+    "mysql": "^2.16.0",
+    "sequelize": "^4.42.1"
+  }
+}
