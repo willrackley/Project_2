@@ -1,0 +1,19 @@
+body {
+    background-image: url("../images/burger1.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.nav-item {
+    border: 1px solid #ffffff;
+    border-radius: 25px;
+}
+
+.nav {
+    position: absolute;
+}
+
+#titleContainer {
+    position: relative;
+    top: 200px
+}

@@ -4,11 +4,55 @@
 <head>
   <meta charset="UTF-8">
   <title>Project 2</title>
+  <!-- custom css -->
+  <link rel="stylesheet" href="css/customStyle.css" media="screen" title="no title">
+  <!-- Latest Bootstrap compiled and minified CSS & JS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-  
 </head>
 
 <body>
+    <!--Navbar with logo-->
+    <nav class="navbar navbar-dark navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand p-0" href="index.html"><h3>Project 2</h3></a>
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item  mr-3 p-1">
+                        <a class="nav-link" href="#">LOG IN</a>
+                    </li>
+                    <li class="nav-item p-1">
+                        <a class="nav-link" href="#">SIGN UP</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="titleContainer">
+        <h1 class="display-4 text-white m-0">Less Waiting. </h1>
+        <form>
+            <div class="row ml-1">   
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <div class="input-group">
+                        <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
+                        <button class="input-group-btn btn btn-warning go inline">Find Restaurant </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div>
+            <h3><span class="badge badge-warning ml-1">Scan QR code </span></h3>
+        </div>
+    </div>
+
     
     
 
