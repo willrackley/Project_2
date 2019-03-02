@@ -3,17 +3,44 @@ body {
     background-repeat: no-repeat;
     background-size: 100% auto;
 }
-
+.navbar-brand h2 {
+    font-family: 'Fugaz One', cursive;
+    letter-spacing: 5px;
+}
+.fas {
+    color: #F5DC47;
+}
 .nav-item {
-    border: 1px solid #ffffff;
+    border: 3px solid #ffffff;
     border-radius: 25px;
+    
+}
+
+.nav-item a:hover {
+    color: #F5DC47 !important;
 }
 
 .nav {
     position: absolute;
 }
 
+#signUp {
+    
+}
+
 #titleContainer {
     position: relative;
     top: 200px
+}
+
+#restaurantSearch {
+    background: #F5DC47;
+}
+
+#logInSignUpLink {
+    color: #000000;
+}
+#scanQRcode {
+    color: #F5DC47;
+    background: #4d4c4c;
 }
