@@ -98,18 +98,18 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="text-center">
+                  <form class="text-center" action="/api/users" method="POST">
                         <div class="form-group">
                             <label for="signUpName"></label>
-                            <input type="text" class="form-control text-center" id="signUpNameInput" placeholder="First name">
+                            <input type="text" name="signUpNameInput" class="form-control text-center" id="signUpNameInput" placeholder="First name">
                         </div>
                         <div class="form-group">
                             <label for="signUpInEmal"></label>
-                            <input type="email" class="form-control text-center" id="signUpEmailInput" aria-describedby="emailHelp" placeholder="Email address">
+                            <input type="email" class="form-control text-center" id="signUpEmailInput" name="signUpEmailInput" aria-describedby="emailHelp" placeholder="Email address">
                         </div>
                         <div class="form-group">
                             <label for="signUpPassword"></label>
-                            <input type="password" class="form-control text-center" id="signUpPasswordInput" placeholder="Password">
+                            <input type="password" class="form-control text-center" id="signUpPasswordInput" name="signUpPasswordInput"  placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-secondary mt-3 px-5"><h5 class="mt-1">SIGN UP</h5></button>
                 </form>
