@@ -40,6 +40,11 @@ body {
 #logInSignUpLink {
     color: #000000;
 }
+
+#signUpLogInLink {
+    color: #000000;
+}
+
 #scanQRcode {
     color: #F5DC47;
     background: #4d4c4c;
