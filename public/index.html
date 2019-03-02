@@ -31,7 +31,7 @@
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#logInModal">LOG IN</a>
                     </li>
                     <li class="nav-item p-1">
-                        <a class="nav-link" href="#" id="signUp">SIGN UP</a>
+                        <a class="nav-link" href="#" id="signUp" data-toggle="modal" data-target="#signUpModal">SIGN UP</a>
                     </li>
                 </ul>
             </div>
@@ -56,9 +56,9 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Login Modal -->
     <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h3 class="modal-title w-100 text-center" id="logInModalLabel">Log in</h3>
@@ -81,11 +81,42 @@
             </div>
             <div class="modal-footer">
               <span class="text-center w-100">Don't have an account?</span>
-              <span class="text-center w-100 text-decoration-none"><a href="" id="logInSignUpLink">SIGN UP</a></span>
+              <span class="text-center w-100 text-decoration-none"><a href="" id="logInSignUpLink" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">SIGN UP</a></span>
             </div>
           </div>
         </div>
     </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title w-100 text-center" id="signUpModalLabel">Sign Up</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="text-center">
+                        <div class="form-group">
+                            <label for="logInEmal"></label>
+                            <input type="email" class="form-control text-center" id="logInEmailInput" aria-describedby="emailHelp" placeholder="Email address">
+                        </div>
+                        <div class="form-group">
+                            <label for="logInPassword"></label>
+                            <input type="password" class="form-control text-center" id="logInPasswordInput" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-secondary mt-3 px-5"><h5 class="mt-1">SIGN UP</h5></button>
+                </form>
+                </div>
+                <div class="modal-footer">
+                  <span class="text-center w-100">Already have an account?</span>
+                  <span class="text-center w-100 text-decoration-none"><a href="" id="signUpLogInLink" data-toggle="modal" data-target="#logInModal" data-dismiss="modal">LOG IN</a></span>
+                </div>
+              </div>
+            </div>
+        </div>
     
     
 
