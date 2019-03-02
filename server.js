@@ -1,6 +1,6 @@
 //dependencies
 var express = require("express");
-
+var bodyParser = require("body-parser");
 
 // Sets up the Express App
 var app = express();
@@ -12,12 +12,15 @@ var db = require("./models");
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false}));
+
 
 // Static directory
 app.use(express.static("public"));
 
 //Routes 
 require("./routes/html-routes.js")(app);
+require("./routes/user-api-routes.js")(app);
 
 
 // Syncing our sequelize models and then starting our Express app
