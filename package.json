@@ -1,11 +1,11 @@
 {
-  "name": "Project_2",
+  "name": "project_2",
   "version": "1.0.0",
   "description": "Project 2 GA Tech Bootcamp group project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,18 @@
   },
   "homepage": "https://github.com/willrackley/Project_2#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "express-session": "^1.15.6",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "sequelize": "^4.42.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }

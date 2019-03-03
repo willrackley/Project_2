@@ -1,31 +1,46 @@
-//dependencies
-var express = require("express");
-var bodyParser = require("body-parser");
+// Dependencies
+const express = require('express');
+const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
 
-// Sets up the Express App
-var app = express();
-var PORT = process.env.PORT || 3000;
+// Setting up database
+const db = require("./models");
 
-// Requiring our models for syncing
-var db = require("./models");
+// Setting up the Express App, assigning port
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+// Setting up Body Parser
+app.use(express.urlencoded({ extended: false }));
 
+// Express Sessions
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
-// Static directory
-app.use(express.static("public"));
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
-//Routes 
-require("./routes/html-routes.js")(app);
-require("./routes/user-api-routes.js")(app);
+// Passport config
+require('./config/passport')(passport);
 
+// Setting up static directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// User Routes
+app.use('/app/users', require('./routes/users'));
+
+// Product routes
+app.use('/app/products', require('./routes/products'));
 
 // Syncing our sequelize models and then starting our Express app
-db.sequelize.sync({ force: true }).then(function() {
-    app.listen(PORT, function() {
-      console.log("App listening on PORT " + PORT);
-    });
-  });
+// force set to true, means that we drop our tables every time we run server
+db.sequelize.sync({force: false}).then(function() {
+	app.listen(PORT, function() {
+		console.log(`INFO: Application is running on port: ${PORT}`);
+	});
+});
