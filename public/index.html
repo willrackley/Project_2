@@ -18,43 +18,45 @@
 </head>
 
 <body id='indexBody'>
-    <!--Navbar with logo-->
-    <nav class="navbar navbar-dark navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand p-0" href="index.html"><h2>Easy<i class="fas fa-hamburger"></i>Eats</h2></a>
-            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item  mr-3 p-1">
-                        <a class="nav-link" href="/login">LOG IN</a>
-                    </li>
-                    <li class="nav-item p-1">
-                        <a class="nav-link" href="#" id="signUp" data-toggle="modal" data-target="#signUpModal">SIGN UP</a>
-                    </li>
-                </ul>
-            </div>
+    
+    
+  <!--Navbar with logo-->
+  <div class="jumbotron-fluid" id="homeJumbotron">
+    <nav class="navbar navbar-dark navbar-expand-lg mb-5">
+      <div class="container">
+        <a class="navbar-brand p-0" href="index.html"><h2>Easy<i class="fas fa-hamburger"></i>Eats</h2></a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item  mr-3 p-1">
+                    <a class="nav-link" href="/login">LOG IN</a>
+                </li>
+                <li class="nav-item p-1">
+                    <a class="nav-link" href="#" id="signUp" data-toggle="modal" data-target="#signUpModal">SIGN UP</a>
+                </li>
+            </ul>
         </div>
+      </div>
     </nav>
-
-    <div class="container" id="titleContainer">
-        <h1 class="display-4 text-white m-0">Less Waiting. </h1>
-        <form>
-            <div class="row ml-1">   
-                <div class="form-group">
-                    <label class="control-label"></label>
-                    <div class="input-group">
-                        <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
-                        <button class="input-group-btn btn inline" id="restaurantSearch">Find Restaurant </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div>
-            <a href="#"><h3><span class="badge ml-1" id="scanQRcode">Scan QR code </span></h3></a>
+    <div class="container mt-5" id="titleContainer">
+      <h1 class="display-4 text-white m-0">Less Waiting. </h1>
+      <form>
+        <div class="row ml-1">   
+          <div class="form-group">
+              <label class="control-label"></label>
+              <div class="input-group">
+                  <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
+                  <button class="input-group-btn btn inline" id="restaurantSearch">Find Restaurant </button>
+              </div>
+          </div>
         </div>
+      </form>
+      <a href="#"><h3><span class="badge ml-1" id="scanQRcode">Scan QR code </span></h3></a>
     </div>
+  </div>
+
 
     <!-- Login Modal -->
     <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
@@ -126,6 +128,13 @@
               </div>
             </div>
         </div>
+  
+  <div id="footer">
+      <footer class="page-footer border-top bg-light font-small">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright</div>
+    </footer>
+  </div>
     
     
   <script src="js/script.js"></script>

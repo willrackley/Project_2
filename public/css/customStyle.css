@@ -1,7 +1,12 @@
-#indexBody {
+body {
+    position: relative;
+}
+
+#homeJumbotron {
     background-image: url("../images/burger1.png");
     background-repeat: no-repeat;
     background-size: 100% auto;
+    height: 700px;
 }
 .navbar-brand h2 {
     font-family: 'Fugaz One', cursive;
@@ -13,7 +18,10 @@
 .nav-item {
     border: 3px solid #ffffff;
     border-radius: 25px;
-    
+}
+
+#blackNav {
+    background: #000000;
 }
 
 .nav-item a:hover {
@@ -21,16 +29,12 @@
 }
 
 .nav {
-    position: absolute;
-}
-
-#signUp {
-    
+   
 }
 
 #titleContainer {
-    position: relative;
-    top: 200px
+    /* position: relative;
+    top: 100px */
 }
 
 #restaurantSearch {
@@ -48,4 +52,10 @@
 #scanQRcode {
     color: #F5DC47;
     background: #4d4c4c;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
