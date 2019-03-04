@@ -12,15 +12,15 @@ router.get('/', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.post('/products', (req, res) => {
+router.post('/add', (req, res) => {
   db.Products.create({
     name: req.body.itemName,
     description: req.body.itemDecription,
     discount_price: req.body.discountPrice,
     category_id: req.body.CatID,
     product_image: req.body.productImg,
-    created_at: req.body.created_at,
-    updated_at: req.body.updated_at
+    // created_at: req.body.created_at,
+    // updated_at: req.body.updated_at
   }).then(results => {
       res.json(results);
       res.end();
