@@ -13,23 +13,31 @@ module.exports = function(passport) {
 		}).then(user => {
 			if (user.length === 0) {
 				return done(null, false, {
-					message: 'That email is not registered'
+					message: 'Email address is not registered'
 				});
 			}
 			bcrypt.compare(password, user[0].password, (err, isMatch) => {
-                if (err) throw err;
-
-                // we check does password match if it matches we have to redirect to dashboard if not error message
-                console.log(isMatch);
+				if (err) throw err;
+				if (isMatch) {
+					return done(null, user, {
+						message: 'Successfully connected'
+					});
+				} else {
+					return done(null, false, {
+						message: 'Password is not correct'
+					});
+				}
 			})
 		})
-    }));
-    
+	}));
 	passport.serializeUser(function(user, done) {
-		done(null, user.id);
+        console.log("idedam i sesija");
+        console.log(user[0].id);
+		done(null, user[0].id);
 	});
 	passport.deserializeUser(function(id, done) {
-		db.User.findById(id, function(err, user) {
+		db.User.findByPk(id, function(err, user) {
+            console.log("kazkas ivyksta");
 			done(err, user);
 		});
 	});
