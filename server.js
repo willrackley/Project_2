@@ -31,14 +31,12 @@ require('./config/passport')(passport);
 // Setting up static directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// index Routes
-app.use('/', require('./routes/index'));
 
 // User Routes
+app.use('/', require('./routes/index'));
 app.use('/app/users', require('./routes/users'));
-
-// Product routes
 app.use('/app/products', require('./routes/products'));
+require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // force set to true, means that we drop our tables every time we run server
