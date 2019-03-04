@@ -19,7 +19,7 @@
 
 <body>
     <!--Navbar with logo-->
-    <nav class="navbar navbar-dark navbar-expand-lg" id="blackNav">
+    <nav class="navbar navbar-dark navbar-expand-lg blackNav">
         <div class="container">
             <a class="navbar-brand p-0" href="index.html"><h2>Easy<i class="fas fa-hamburger"></i>Eats</h2></a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,16 +27,37 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item  mr-3 p-1">
-                        <a class="nav-link" href="/login">LOG IN</a>
-                    </li>
-                    <li class="nav-item p-1">
-                        <a class="nav-link" href="#" id="signUp" data-toggle="modal" data-target="#signUpModal">SIGN UP</a>
+                    <li class="nav-item dropdown p-1">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Balance</a>
+                            <a class="dropdown-item" href="#">Order History</a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="jumbotron-fluid" id="userJumbotron">
+        <div class="container" id="userTitleContainer">
+            <h3 class="display-4 text-white m-0">Ready to Order? </h3>
+            <a href="#"><h3><span class="badge ml-1" id="scanQRcode">Scan QR code </span></h3></a>
+            <form>
+                <div class="row ml-1">   
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <div class="input-group">
+                        <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
+                        <button class="input-group-btn btn inline" id="restaurantSearch">Find Restaurant </button>
+                    </div>
+                </div>
+                </div>
+            </form>
+            
+        </div>   
+        
+    </div>
 
     <div id="footer">
         <footer class="page-footer border-top bg-light font-small">

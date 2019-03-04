@@ -8,6 +8,13 @@ body {
     background-size: 100% auto;
     height: 700px;
 }
+
+#userJumbotron {
+    background-image: url("../images/dinnerTable.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 500px;
+}
 .navbar-brand h2 {
     font-family: 'Fugaz One', cursive;
     letter-spacing: 5px;
@@ -20,7 +27,7 @@ body {
     border-radius: 25px;
 }
 
-#blackNav {
+.blackNav {
     background: #000000;
 }
 
