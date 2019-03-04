@@ -31,7 +31,9 @@ require('./config/passport')(passport);
 // Setting up static directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Routes
+
+// User Routes
+app.use('/', require('./routes/index'));
 app.use('/app/users', require('./routes/users'));
 app.use('/app/products', require('./routes/products'));
 require("./routes/html-routes.js")(app);

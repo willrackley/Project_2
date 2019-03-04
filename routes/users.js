@@ -13,10 +13,6 @@ router.get('/', (req, res) => {
 	}).catch(err => console.log(err));
 });
 
-router.get('/login', (req, res) => {
-	res.send("pizda veikia");
-});
-
 // Route to handle user registration
 router.post('/register', (req, res) => {
   console.log(req.body);
@@ -74,19 +70,29 @@ router.post('/register', (req, res) => {
 	}
 });
 
-// I have to finish this post method. fix redirects and error messages
 router.post('/login', (req, res, next) => {
-	console.log(req.body);
+	let messages = [];
 	passport.authenticate('local', function(err, user, info) {
 		console.log(info);
 		if (err) { 
 			return next(err);
 			 }
-    if (!user) { return res.redirect('/login'); }
+    if (!user) {
+			messages.push({ info, type: 'warning' });
+			return res.json(messages);
+		}
+		else {
+			console.log("pradedam login funkcija");
+			console.log(user[0].id)
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/users/' + user.username);
-    });
+			if (err) { 
+				return next(err); 
+			} else {
+				console.log("connected");
+			return res.json(user);
+			}
+		});
+	}
   })(req, res, next);
 });
 
