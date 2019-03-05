@@ -1,44 +1,51 @@
+// Login logic to check users email and password
+// If we have a match send user to his dashboard
 const LocalStrategy = require('passport-local').Strategy;
-const db = require("../models");
 const bcrypt = require('bcryptjs');
-
+const db = require("../models");
 module.exports = function(passport) {
 	passport.use(new LocalStrategy({
-		usernameField: 'email'
-	}, function(email, password, done) {
-		db.User.findAll({
+		usernameField: 'email',
+		passwordField: 'password'
+	}, (email, password, done) => {
+		db.User.findOne({
 			where: {
 				email: email
 			}
 		}).then(user => {
-			if (user.length === 0) {
+			// If we don't find user by his email
+			if (!user) {
 				return done(null, false, {
-					message: 'Email address is not registered'
+					// Email doesn't exist in database
+					message: 'The email address or password is incorrect'
+				});
+			} else { // If we find user by email
+				bcrypt.compare(password, user.password, (err, isMatch) => {
+					if (err) throw err;
+					// Check does users password match with record in database
+					if (isMatch) {
+						return done(null, user);
+					} else {
+						return done(null, false, {
+							// Password is incorrect
+							message: 'The email address or password is incorrect'
+						});
+					}
 				});
 			}
-			bcrypt.compare(password, user[0].password, (err, isMatch) => {
-				if (err) throw err;
-				if (isMatch) {
-					return done(null, user, {
-						message: 'Successfully connected'
-					});
-				} else {
-					return done(null, false, {
-						message: 'Password is not correct'
-					});
-				}
-			})
-		})
+		});
 	}));
+	
 	passport.serializeUser(function(user, done) {
-        console.log("idedam i sesija");
-        console.log(user[0].id);
-		done(null, user[0].id);
+		done(null, user.id);
 	});
 	passport.deserializeUser(function(id, done) {
-		db.User.findByPk(id, function(err, user) {
-            console.log("kazkas ivyksta");
-			done(err, user);
+		db.User.findByPk(id).then(function(user) {
+			if (user) {
+				done(null, user.get());
+			} else {
+				done(user.errors, null);
+			}
 		});
 	});
-}
+};
