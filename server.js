@@ -12,7 +12,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setting up Body Parser
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+	extended: false
+}));
 
 // Express Sessions
 app.use(session({
@@ -31,8 +33,7 @@ require('./config/passport')(passport);
 // Setting up static directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// User Routes
+// Routes
 app.use('/app/users', require('./routes/users'));
 app.use('/app/products', require('./routes/products'));
 app.use('/app/dashboard', require('./routes/dashboard'));
@@ -40,7 +41,9 @@ require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // force set to true, means that we drop our tables every time we run server
-db.sequelize.sync({force: false}).then(function() {
+db.sequelize.sync({
+	force: false
+}).then(function() {
 	app.listen(PORT, function() {
 		console.log(`INFO: Application is running on port: ${PORT}`);
 	});
