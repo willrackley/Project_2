@@ -60,10 +60,20 @@ body {
     color: #F5DC47;
     background: #000000;
 }
+
+#itemAmountInput {
+    font-size: 24px;
+}
+
+#addBtn {
+    font-size: 22px;
+}
+
 #menuContainer .card-header {
     background: #000000;
     color: #ffffff;
 }
+
 #menuContainer {
    margin-top: 100px;
    margin-bottom: 100px;
