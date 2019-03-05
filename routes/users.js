@@ -4,6 +4,7 @@ const db = require("../models");
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const router = express.Router();
+
 // Router just for testing to see all users
 router.get('/', (req, res) => {
 	db.User.findAll({}).then(results => {
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
 		res.end();
 	}).catch(err => console.log(err));
 });
+
 // Route to handle user registration
 router.post('/register', (req, res) => {
 	console.log(req.body);
@@ -84,17 +86,16 @@ router.post('/register', (req, res) => {
 		})
 	}
 });
+// Login route app/users/login
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', {
-		successRedirect: '/app/dashboard/manager',
+		successRedirect: '/app/dashboard',
 		failureRedirect: '/login',
 		failureFlash: false
 	})(req, res, next);
 });
-
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
-
 module.exports = router;

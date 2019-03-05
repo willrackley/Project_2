@@ -21,5 +21,19 @@ module.exports = {
 			if (req.user.user_group === "kitchen" || req.user.user_group == "manager") return next();
 		}
 		res.redirect('/login');
+	},
+	// Function to check is user access status and redirect
+	isLogged: function(req, res, next) {
+		if (req.isAuthenticated()) {
+			if (req.user.user_group === "customer") {
+				res.redirect('/app/dashboard/customer');
+			} else if (req.user.user_group === "manager") {
+				res.redirect('/app/dashboard/manager');
+			} else {
+				res.redirect('/app/dashboard/kitchen');
+			}
+		} else {
+			res.redirect('/login');
+		}
 	}
 };
