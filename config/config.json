@@ -1,7 +1,7 @@
 {
 	"development": {
 		"username": "root",
-		"password": "password",
+		"password": "Isis2phoenix",
 		"database": "qr_code",
 		"host": "127.0.0.1",
 		"dialect": "mysql",
@@ -18,7 +18,7 @@
 	},
 	"production": {
 		"username": "root",
-		"password": null,
+		"password": "Isis2phoenix",
 		"database": "qr_code",
 		"host": "127.0.0.1",
 		"dialect": "mysql"
