@@ -13,7 +13,7 @@ body {
     background-image: url("../images/dinnerTable.png");
     background-repeat: no-repeat;
     background-size: 100% auto;
-    height: 500px;
+    height: 400px;
 }
 .navbar-brand h2 {
     font-family: 'Fugaz One', cursive;
@@ -58,7 +58,20 @@ body {
 
 #scanQRcode {
     color: #F5DC47;
-    background: #4d4c4c;
+    background: #000000;
+}
+#menuContainer .card-header {
+    background: #000000;
+    color: #ffffff;
+}
+#menuContainer {
+   margin-top: 100px;
+   margin-bottom: 100px;
+}
+
+#userScanQRcode {
+    color: #F5DC47;
+    background: #000000;
 }
 
 #footer {
