@@ -33,9 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // User Routes
-app.use('/', require('./routes/index'));
 app.use('/app/users', require('./routes/users'));
 app.use('/app/products', require('./routes/products'));
+app.use('/app/dashboard', require('./routes/dashboard'));
 require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app

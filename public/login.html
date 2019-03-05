@@ -45,14 +45,14 @@
             </div>
             <div class="col-4">
                 <h2 class="text-center">Log in</h2>
-                <form class="text-center" id="log-in">
+                <form class="text-center" id="log-in" action="/app/users/login" method="POST">
                     <div class="form-group">
                         <label for="logInEmal"></label>
-                        <input type="email" class="form-control text-center" id="logInEmailInput" aria-describedby="emailHelp" placeholder="Email address">
+                        <input type="email" class="form-control text-center" name="email" aria-describedby="emailHelp" placeholder="Email address">
                     </div>
                     <div class="form-group">
                         <label for="logInPassword"></label>
-                        <input type="password" class="form-control text-center" id="logInPasswordInput" placeholder="Password">
+                        <input type="password" class="form-control text-center" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-secondary mt-3 px-5"><h5 class="mt-1">LOG IN</h5></button>
                 </form>

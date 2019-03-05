@@ -18,13 +18,3 @@ $("#sign-up").submit(function(event) {
         }
     });
 });
-
-$("#log-in").submit(function(event) {
-    var userData = {
-        email: $("#logInEmailInput").val(),
-        password: $("#logInPasswordInput").val()
-    }
-    $.post("/app/users/login", userData).then(function(data) {
-        console.log(data);
-    });
-});

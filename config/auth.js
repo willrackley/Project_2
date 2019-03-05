@@ -1,16 +1,10 @@
+// Passport function to check is user allowed to see content
+// If user is not allowed to see content, redirect to login page
 module.exports = {
-    ensureAuthenticated: function(req, res, next) {
-        value = req.isAuthenticated();
-        console.log(value);
-        if (value) {
-            console.log ("user is allowed to view content");
-            // what to do if we have access
-            res.end();
-            //return next();
-        } else {
-            console.log("no access to this page");
-            // what to do if no access
-            res.end();
-        }
-    }
-}
+	ensureAuthenticated: function(req, res, next) {
+		if (req.isAuthenticated()) {
+			return next();
+		}
+		res.redirect('/login');
+	}
+};
