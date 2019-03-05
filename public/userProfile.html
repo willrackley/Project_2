@@ -39,25 +39,30 @@
         </div>
     </nav>
 
-    <div class="jumbotron-fluid" id="userJumbotron">
-        <div class="container" id="userTitleContainer">
-            <h3 class="display-4 text-white m-0">Ready to Order? </h3>
-            <a href="#"><h3><span class="badge ml-1" id="scanQRcode">Scan QR code </span></h3></a>
-            <form>
-                <div class="row ml-1">   
-                <div class="form-group">
-                    <label class="control-label"></label>
-                    <div class="input-group">
-                        <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
-                        <button class="input-group-btn btn inline" id="restaurantSearch">Find Restaurant </button>
+    <div class="container mt-5 " id="userTitleContainer">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3 class="display-4 text-dark mb-3">Ready to order? </h3>
+                <a href="#"><h3><span class="badge ml-1 p-3" id="userScanQRcode">Scan QR code </span></h3></a>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <form>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <div class="input-group">
+                            <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
+                            <button class="input-group-btn btn inline" id="restaurantSearch">Find Restaurant </button>
+                        </div>
                     </div>
-                </div>
-                </div>
-            </form>
-            
-        </div>   
-        
+                </form>
+            </div>
+        </div>
+    </div>   
+
+    <div class="container" id="menuContainer">
+    
     </div>
+        
 
     <div id="footer">
         <footer class="page-footer border-top bg-light font-small">
@@ -67,6 +72,7 @@
     </div>
     
   <script src="js/script.js"></script>
+  <script src="js/userProfileScript.js"></script>
 </body>
 
 </html>
