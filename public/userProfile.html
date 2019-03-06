@@ -71,19 +71,7 @@
                 </div>
                 <button class="btn btn-primary mb-3" id="reviewOrder">Review Order</button>
                 <div id="priceTotal" class="border-top">
-                        <form action="/charge" method="POST">
-                        <script
-                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="pk_test_o24ghcoulY4sQIVbTDu934ow"
-                          data-amount="999"
-                          data-name="Easy Eats"
-                          data-description="Total Due"
-                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                          data-locale="auto">
-                        </script>
-                        <input type="hidden" name="chargeAmount">
-                      </form>
-                    <div class="row mt-3">
+                    <div class="row my-3">
                         <div class="col-6 text-left">
                             <div class="text-muted">Subtotal</div>
                             <div class="text-muted">Tax</div>
@@ -95,7 +83,18 @@
                             <div class="" id="total"></div>
                         </div>
                     </div>
-                    
+                    <form action="/charge" method="POST" id="chargeForm">
+                        <script
+                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="pk_test_o24ghcoulY4sQIVbTDu934ow"
+                          data-amount=""
+                          data-name="Easy Eats"
+                          data-description="Total Due"
+                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                          data-locale="auto">
+                        </script>
+                        <input type="hidden" name="chargeAmount">
+                    </form>
                 </div>
             </div>
         </div>
