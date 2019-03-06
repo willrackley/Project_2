@@ -2,16 +2,19 @@
 $(document).ready(function(){
     var cart = [];
     var myOrder = [];
-    var deleteCtr = 0;
+    var itemTotals = [];
     var menuItems;
     $('#orderHeader').hide();
     $('#priceTotal').hide();
+    $('#reviewOrder').hide();
+
+    /*=====================FUNCTIONS====================*/
 
     //creates the rows to be displayed in the orders section
     function creatOrderRows(itemChoice){
         var orderDiv = $('<div class="card mb-2" id='+itemChoice.id+'>');
         var cardBody = $('<div class="card-body">');
-        var input = $('<input type="number" class="mr-3" min="1" value='+ itemChoice.amount + ' max="10">');
+        var input = $('<input type="number" class="mr-3" min="1" value='+ itemChoice.amount + ' max="10" id="input' + itemChoice.id +'" >');
         var hiddenInput = $('<input type="hidden" class="hidden" value='+ itemChoice.id + '>');
         var deleteBtnDiv = $('<div class="mb-2 text-right">');
         var deleteBtn = $('<button class="deleteItem" >');
@@ -84,6 +87,31 @@ $(document).ready(function(){
         $('#orderSection').append(myOrder);
     } 
 
+    //function to display order total in 00.00 format
+    function roundNumber(num,n){
+        return parseFloat(Math.round(num * Math.pow(10, n)) /Math.pow(10,n)).toFixed(n);
+      }
+
+    //function to calculate final order total
+    function finalTotal(){
+        var sum = 0;
+        
+        for(var i=0; i < itemTotals.length; i++){
+            sum += itemTotals[i];
+        }
+
+        var taxPercentage = sum * .07;
+        taxPercentage = parseFloat(taxPercentage.toFixed(2));
+        var orderTotal = taxPercentage + sum;
+        orderTotal = parseFloat(orderTotal.toFixed(2))
+        
+        $('#subtotal').text(sum);
+        $('#tax').text(taxPercentage);
+        $('#total').text(roundNumber(orderTotal,2));
+    }
+
+     /*=====================LOGIC====================*/
+
     $('#userScanQRcode').on('click', function(){
         getMenu();
     });
@@ -91,7 +119,7 @@ $(document).ready(function(){
     //click event that adds menu item to the users order
     $(document).on('click', '.addBtn', function(){
         $('#orderHeader').show();
-        $('#priceTotal').show();
+        $('#reviewOrder').show();
 
         var inputKey = $(this).attr('key');
         var inputSelector = '#itemAmountInput' + inputKey;
@@ -138,6 +166,16 @@ $(document).ready(function(){
                 cart.splice(i,1); 
             }
         } 
+    });
+
+    $(document).on('click', '#reviewOrder', function(){
+        $('#priceTotal').show();
+        for(var i=0; i < cart.length; i++){
+            var selector = '#input'+ (i+1);
+            var totalCost = $(selector).val() * cart[i].price;
+            itemTotals.push(totalCost);
+        }
+        finalTotal();
     });
 
 });
