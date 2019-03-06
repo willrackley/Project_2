@@ -7,16 +7,15 @@ $(document).ready(function(){
     $('#orderHeader').hide();
     $('#priceTotal').hide();
 
+    //creates the rows to be displayed in the orders section
     function creatOrderRows(itemChoice){
-        var orderDiv = $('<div class="card mb-2" id='+deleteCtr+'>');
+        var orderDiv = $('<div class="card mb-2" id='+itemChoice.id+'>');
         var cardBody = $('<div class="card-body">');
         var input = $('<input type="number" class="mr-3" min="1" value='+ itemChoice.amount + ' max="10">');
         var hiddenInput = $('<input type="hidden" class="hidden" value='+ itemChoice.id + '>');
-
         var deleteBtnDiv = $('<div class="mb-2 text-right">');
         var deleteBtn = $('<button class="deleteItem" >');
-        deleteBtn.attr('id',deleteCtr);
-        //deleteBtn.attr('removed','false');
+        deleteBtn.attr('id',itemChoice.id);
         deleteBtn.text('x');
         deleteBtn.appendTo(deleteBtnDiv);
         deleteBtnDiv.appendTo(cardBody);
@@ -24,14 +23,12 @@ $(document).ready(function(){
         cardBody.append(input);
         cardBody.append(itemChoice.name + " | " + itemChoice.price);
         cardBody.appendTo(orderDiv);
-        
         $('#orderSection').append(orderDiv);
     }
 
-    function initializeRows() {
-            
+    //takes all products from the database and runs a function to neatly display them 
+    function initializeRows() { 
         $('#menuContainer').empty();
-    
         var itemsToAdd = [];
         for (var i = 0; i < menuItems.length; i++) {
             itemsToAdd.push(createNewRow(menuItems[i]));
@@ -39,6 +36,7 @@ $(document).ready(function(){
         $('#menuContainer').append(itemsToAdd);
     }
 
+    //creates the rows that are going to be displayed in menu section
     function createNewRow(menuItem) {
         var card = $('<div>');
         card.addClass('card mb-5');
@@ -67,6 +65,7 @@ $(document).ready(function(){
         $('#menuContainer').append(card);
     }
 
+    //function that grabs all api information
     function getMenu() {
         $.get('/app/products', function(data) {
             menuItems = data;
@@ -76,22 +75,20 @@ $(document).ready(function(){
         });
     }
 
+    //displays selected menu item in the orders section
     function displayOrders(){
         $('#orderSection').empty();
         for(var i=0; i < cart.length; i++){
             myOrder.push(creatOrderRows(cart[i]));
         }
         $('#orderSection').append(myOrder);
-        deleteCtr++;
     } 
 
     $('#userScanQRcode').on('click', function(){
-
-        //function that grabs all api information
-        
         getMenu();
     });
 
+    //click event that adds menu item to the users order
     $(document).on('click', '.addBtn', function(){
         $('#orderHeader').show();
         $('#priceTotal').show();
@@ -106,8 +103,9 @@ $(document).ready(function(){
             price: $(this).attr('itemPrice'),
             amount: inputAmount
         };
-        console.log("we are adding this " + itemChoice.id);
         
+        //logic to make sure the user cant add repeat items to his order
+        //it increments the amount of the item instead
         if(cart.length === 0){
             cart.push(itemChoice);
             console.log('added to empty cart');
@@ -124,26 +122,22 @@ $(document).ready(function(){
             }
             if(newItem) cart.push(itemChoice);
         }
-
         console.log(cart);
-
         displayOrders();
     }); 
 
+    //click event deletes item from order's section
     $(document).on('click', '.deleteItem', function(){
         var deleteKeySelector = '#' + $(this).attr('id');
         var deleteKey = $(this).attr('id');
         var deleteItem = $('.hidden').val();
-        console.log(deleteItem);
+    
         $(deleteKeySelector).remove();
         for(var i=0; i < cart.length; i++){
-            if(cart[i].id === deleteItem){
-                cart[i].amount = 0;
-                cart.splice(i,1);
+            if(cart[i].id === parseInt(deleteKey)){
+                cart.splice(i,1); 
             }
-        }
-        
-        //console.log(cart);
+        } 
     });
 
 });
