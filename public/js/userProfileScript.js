@@ -105,9 +105,9 @@ $(document).ready(function(){
         var orderTotal = taxPercentage + sum;
         orderTotal = parseFloat(orderTotal.toFixed(2))
         
-        $('#subtotal').text(sum);
-        $('#tax').text(taxPercentage);
-        $('#total').text(roundNumber(orderTotal,2));
+        $('#subtotal').text('$' + sum);
+        $('#tax').text('$' + taxPercentage);
+        $('#total').text('$' + roundNumber(orderTotal,2));
     }
 
      /*=====================LOGIC====================*/

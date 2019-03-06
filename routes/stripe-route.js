@@ -23,6 +23,7 @@ module.exports = function(app) {
 app.post('/charge', function(req, res){
     var token = req.body.stripeToken;
     var chargeAmount = req.body.chargeAmount;
+    
     var charge = stripe.charges.create({
         amount: chargeAmount,
         currency:"usd",
