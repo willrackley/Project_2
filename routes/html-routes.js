@@ -32,6 +32,12 @@ module.exports = function(app) {
 	app.get("/add-menu-item", function(req, res) {
 		res.sendFile(path.join(__dirname, "../public/addMenuItem.html"));
 	});
+	// --- added by GG - 03/05-2:55pm
+	// this is to display orders form (app/orders)
+	app.get("/orders", function(req, res) {
+		res.sendFile(path.join(__dirname, "../public/orders.html"));
+	});
+	// -- end of edits by GG
 	// MAIN APP ROUTE 
 	app.get('/app', isLogged, (req, res) => {
 		// This route is secured, used only to redirect user. (isLogged)
