@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
+const flash = require('connect-flash');
 const session = require('express-session');
 
 // Setting up database
@@ -26,6 +27,20 @@ app.use(session({
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Setting up flash messages
+app.use(flash());
+
+// Global variables
+app.use(function(req, res, next) {
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	next();
+  });
+
+// Setting up templates 
+app.set('view engine', 'ejs');
 
 // Passport config
 require('./config/passport')(passport);

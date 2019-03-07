@@ -6,6 +6,7 @@ module.exports = {
 		if (req.isAuthenticated()) {
 			if (req.user.user_group === "customer") return next();
 		}
+		req.flash('error_msg', 'No access to this page!');
 		res.redirect('/login');
 	},
 	// Manager authentication
@@ -13,6 +14,7 @@ module.exports = {
 		if (req.isAuthenticated()) {
 			if (req.user.user_group === "manager") return next();
 		}
+		req.flash('error_msg', 'No access to this page!');
 		res.redirect('/login');
 	},
 	// Kitchen or Manager authentication
@@ -20,6 +22,7 @@ module.exports = {
 		if (req.isAuthenticated()) {
 			if (req.user.user_group === "kitchen" || req.user.user_group == "manager") return next();
 		}
+		req.flash('error_msg', 'No access to this page!');
 		res.redirect('/login');
 	},
 	// Function to check is user access status and redirect
@@ -33,6 +36,7 @@ module.exports = {
 				res.redirect('/app/dashboard/kitchen');
 			}
 		} else {
+			req.flash('error_msg', 'No access to this page!');
 			res.redirect('/login');
 		}
 	}
