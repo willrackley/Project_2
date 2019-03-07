@@ -17,7 +17,7 @@ module.exports = function(passport) {
 			if (!user) {
 				return done(null, false, {
 					// Email doesn't exist in database
-					message: 'The email address or password is incorrect'
+					message: 'Email address is incorrect!'
 				});
 			} else { // If we find user by email
 				bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -28,7 +28,7 @@ module.exports = function(passport) {
 					} else {
 						return done(null, false, {
 							// Password is incorrect
-							message: 'The email address or password is incorrect'
+							message: 'Password is incorrect!'
 						});
 					}
 				});

@@ -18,3 +18,5 @@ $("#sign-up").submit(function(event) {
         }
     });
 });
+
+//$(".login-info-messages").text(success_msg);

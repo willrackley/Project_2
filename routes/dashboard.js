@@ -6,7 +6,6 @@ const { customerAuthenticated, managerAuthenticated, isLogged } = require('../co
 
 // MAIN DASHBOARD ROUTE 
 router.get('/', isLogged, (req, res) => {
-    // This route is secured, used only to redirect user. (isLogged)
 });
 
 // MANAGER ROUTES - all routes associated with manager 

@@ -17,7 +17,8 @@ module.exports = function(app) {
 				res.redirect('/app/dashboard/kitchen');
 			}
 		} else {
-			res.sendFile(path.join(__dirname, "../public/login.html"));
+		res.render('pages/login');
+		// res.sendFile(path.join(__dirname, "../public/userProfile.html"));
 		}
 	});
 	// this route has to be moved or deleted dashboard.js (app/dashboard/customer)
