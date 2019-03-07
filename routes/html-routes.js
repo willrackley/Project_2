@@ -31,8 +31,8 @@ module.exports = function(app) {
 	});
 	// --- added by GG - 03/05-2:55pm
 	// this is to display orders form (app/orders)
-	app.get("/orders", function(req, res) {
-		res.sendFile(path.join(__dirname, "../public/orders.html"));
+	app.get("/customerOrders", function(req, res) {
+		res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
 	});
 	// -- end of edits by GG
 	// MAIN APP ROUTE 

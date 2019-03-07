@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Easy Eats: Orders</title>
+  <title>Easy Eats: My Profile</title>
   <!-- custom css -->
   <link rel="stylesheet" href="/css/customStyle.css" media="screen" title="no title">
   <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
@@ -28,8 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item  mr-3 p-1">
-                        <!-- Review: GG 03/05 2:58pm -->
-                        <a class="nav-link" href="/orders">Orders</a>
+                        <a class="nav-link" href="/app/dashboard/manager/add-menu-item">Return to home</a>
                     </li>
                 </ul>
             </div>
@@ -38,38 +37,40 @@
 
     <div class="container mt-5">
         <h3 class="border-bottom p-1 mb-5">Orders Dashboard</h3>
-        <h3>Orders</h3>
-        <table class="table">
+        <h3>Menu Items</h3>
+        <div class="container" id="todaysOrdersContainer">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Comment</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Past Orders</h3>
+        <div class="container" id="pastOrdersContainer"> 
+          <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">Order ID</th>
-                    <th scope="col">lipsum</th>
-                    <th scope="col">lipsum</th>
-                    <th scope="col">lipsum</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Comment</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>lipsum</td>
-                    <td>lipsum</td>
-                    <td>lipsum</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>lipsum</td>
-                    <td>lipsum</td>
-                    <td>lipsum</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>lipsum</td>
-                    <td>lipsum</td>
-                    <td>lipsum</td>
-                  </tr>
+                <tbody id="pastOrderTableBody">
+                  
                 </tbody>
-              </table>
-        <h3>Change User info</h3>
+          </table>
+        </div>
+        
     </div>
 
     <div id="footer">
@@ -80,8 +81,7 @@
     </div>
     
   <script src="js/script.js"></script>
-  <!-- GG: Change when js/orders.js gets ready -->
-  <script src="js/managerProfileScript.js"></script>
+  <script src="js/customerOrderScript.js"></script>
 </body>
 
 </html>
