@@ -25,33 +25,46 @@ router.get('/customerDash', function(req, res) {
     }).catch(err => console.log(err));
   });
 
-  // end of changes by German
+	// end of changes by German
+	
+router.get("/:id", function(req, res){
+	db.Orders.findOne({
+		where: {
+			id: req.params.id
+		}
+		}).then(function(results) {
+			res.json(results);
+		});
+});
 
 router.post('/add', (req, res) => {
 	db.Orders.create({
-		order_user_id: req.body.orderUserId,
-        status: req.body.status,
-        date: req.body.date,
-        comment: req.body.comment
+		order_user_id: req.user.id,
+		total_price: req.body.total_price,
+		status: req.body.status,
+		comment: req.body.comment
 	}).then(results => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
 });
 
-router.get('/orders-detailed', (req, res) => {
+router.get('/add/detailed', (req, res) => {
 	db.DetailedOrder.findAll({}).then(results => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
 });
 
-router.post('/orders-detailed/add', (req, res) => {
-	db.DetailedOrder.create({
-		order_id: req.body.orderId,
-		product_id: req.body.productId,
-        quantity: req.body.quantity,
-        total_price: req.body.totalPrice,
+router.post('/add/detailed', (req, res) => {
+	console.log(req.body);
+	var totalPrice = (req.body.amount * req.body.price);
+	console.log(totalPrice);
+	db.detailOrders.create({
+		order_id: req.body.order_id,
+		product_id: req.body.id,
+		quantity: req.body.amount,
+		total_price: totalPrice,
 	}).then(results => {
 		res.json(results);
 		res.end();

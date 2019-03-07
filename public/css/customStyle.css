@@ -78,8 +78,8 @@ body {
     border: 2px solid #F5DC47 !important;
 }
 
-.menuCards {
-   
+#logicBody {
+   margin-bottom: 100px;
 }
 
 #menuContainer {

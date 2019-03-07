@@ -3,7 +3,12 @@ $(document).ready(function(){
     var cart = [];
     var myOrder = [];
     var itemTotals = [];
+    var userId = [];
+    var postedCost = [];
+    var grabOrderId= [];
+    var orderId;
     var menuItems;
+
     $('#orderHeader').hide();
     $('#priceTotal').hide();
     $('#reviewOrder').hide();
@@ -53,6 +58,7 @@ $(document).ready(function(){
         var addBtn = $('<button>');
         addBtn.addClass("addBtn");
         addBtn.attr("itemName", menuItem.name);
+        console.log("testing id " + menuItem.id)
         addBtn.attr("key", menuItem.id);
         addBtn.attr("itemPrice", menuItem.discount_price);
         var addSymbol = $('<i class="fas fa-plus">');
@@ -71,9 +77,26 @@ $(document).ready(function(){
     function getMenu() {
         $.get('/app/products', function(data) {
             menuItems = data;
-            console.log(menuItems)
-            ;
+            console.log(menuItems);
             initializeRows();
+        });
+    }
+
+
+    function postOrder(createOrder, cart){
+        $.post("/app/orders/add", createOrder, function(data) {
+            orderId = data.id
+
+            for(var i=0; i < cart.length; i++){ 
+                cart[i].order_id = orderId;
+                $.post("/app/orders/add/detailed", cart[i], function(){
+                });       
+            }
+        });
+    }
+    
+    function postDetailedOrder(detailedOrder){
+        $.post("/app/orders/add/detailed", detailedOrder, function() {  
         });
     }
 
@@ -97,18 +120,18 @@ $(document).ready(function(){
         
         for(var i=0; i < itemTotals.length; i++){
             sum += itemTotals[i];
+            sum = parseFloat(sum.toFixed(2));
         }
-
+ 
         var taxPercentage = sum * .07;
         taxPercentage = parseFloat(taxPercentage.toFixed(2));
         var orderTotal = taxPercentage + sum;
         orderTotal = parseFloat(orderTotal.toFixed(2))
         
-        $('#subtotal').text('$' + sum);
-        $('#tax').text('$' + taxPercentage);
+        $('#subtotal').text('$' + roundNumber(sum,2));
+        $('#tax').text('$' + roundNumber(taxPercentage,2));
         $('#total').text('$' + roundNumber(orderTotal,2));
-
-        
+        postedCost.push(roundNumber(orderTotal,2));
     }
 
      /*=====================LOGIC====================*/
@@ -128,7 +151,7 @@ $(document).ready(function(){
         var inputAmount = parseInt($(inputSelector).val());
 
         var itemChoice = {
-            id: parseInt(inputKey),
+            id: inputKey,
             name: $(this).attr('itemName'),
             price: $(this).attr('itemPrice'),
             amount: inputAmount
@@ -173,19 +196,21 @@ $(document).ready(function(){
     $(document).on('click', '#reviewOrder', function(){
         $('#priceTotal').show();
         for(var i=0; i < cart.length; i++){
-            var selector = '#input'+ (i+1);
+            var selector = '#input'+ cart[i].id;
             var totalCost = $(selector).val() * cart[i].price;
             itemTotals.push(totalCost);
         }
         finalTotal();
-
-        var createOrder = {
-            order_user_id: 1, //need to obtain real user id
-            //menu_id: ?
-            status: "pending",
-            date: "", //possibly moment.js
-            comment: $('#comment').val()
-        }
     });
 
+    $(document).on('click', '#testBtn', function(){
+        var costIndex = postedCost.length - 1;
+
+        var createOrder = {
+            total_price: parseFloat(postedCost[costIndex]),
+            status: "pending",
+            comment: $('#commentInput').val()
+        }
+        postOrder(createOrder, cart);  
+    });
 });
