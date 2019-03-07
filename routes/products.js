@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
 // @route    app/products/categories
 // @desc     Pull product categories from database
 // @access   Manager
+// @status   Need to be removed before production
 router.get('/categories', (req, res) => {
 	db.productCategories.findAll({}).then(results => {
 		res.send(results);
@@ -29,6 +30,7 @@ router.get('/categories', (req, res) => {
 // @route    app/products/categories/add
 // @desc     Add menu category to database
 // @access   Only Manager
+// @status   Completed
 router.post('/categories/add', managerAuthenticated, (req, res) => {
 	var categoryName = req.body.categoryName;
 	if (categoryName === '') {
@@ -57,16 +59,19 @@ router.post('/categories/add', managerAuthenticated, (req, res) => {
 // @route    app/products/add
 // @desc     Add form input (product) in database
 // @access   Only Manager
+// @status   Not finished needs validations and security check
 router.post('/add', (req, res) => {
+	console.log(req.body);
 	db.Products.create({
 		name: req.body.itemName,
 		description: req.body.itemDecription,
+		regular_price: req.body.regularPrice,
 		discount_price: req.body.discountPrice,
-		category_id: req.body.CatID,
+		category_id: req.body.productCategory,
 		product_image: req.body.productImg,
 	}).then(results => {
-		res.json(results);
-		res.end();
+		req.flash('success_msg', 'Menu item successfully added');
+		res.redirect('/app/dashboard/manager/add-menu-item');
 	}).catch(err => console.log(err));
 });
 module.exports = router;

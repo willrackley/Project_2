@@ -17,6 +17,10 @@ router.get('/manager/add-menu-category', managerAuthenticated, (req, res) => {
     res.render('pages/addMenuCategory');
 });
 
+router.get("/manager/add-menu-item", managerAuthenticated, function(req, res) {
+    res.render('pages/addMenuItem');
+});
+
 // CUSTOMER ROUTES - all routes associated with customer
 router.get('/customer', customerAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../public/userProfile.html"));

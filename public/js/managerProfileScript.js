@@ -44,6 +44,12 @@ var menuItems;
 $(document).ready(function(){
     $.get('/app/products/categories', function(data) {
         console.log(data);
+        for (var i=0; i < data.length; i++) {
+            var option =$('<option>');
+            option.attr('value', data[i].id);
+            option.text(data[i].name);
+            option.appendTo($("#select-categories"));
+        }
     });
 });
 

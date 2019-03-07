@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Easy Eats: Add Menu Item</title>
+        <% include ../partials/head %>
+    </head>
+
+    <body>
+        <% include ../partials/manager-header %>
+        <div class="container my-5">
+                <h3 class="border-bottom p-1 mb-4">Add Menu Item</h3>
+                <div class="row">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                            <% include ../partials/messages %>
+                        <form class="text-center" id="addMenuItem" method="POST" action="/app/products/add">
+                            <div class="form-group">
+                                <select class="form-control" name="productCategory" id="select-categories" required>
+                                    <option value="" selected disabled>Select Product Category</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemName"></label>
+                                <input type="text" class="form-control text-center" name="itemName" placeholder="Item Name">
+                            </div>
+                            <div class="form-group">
+                                    <label for="regularPrice">  </label>
+                                    <input type="text" class="form-control text-center" name="regularPrice" placeholder="Regular Price">
+                                </div>
+                            <div class="form-group">
+                                <label for="discountPrice">  </label>
+                                <input type="text" class="form-control text-center" name="discountPrice" placeholder="Discount Price">
+                            </div>
+                            <div class="form-group">
+                                <label for="productImg"> </label>
+                                <input type="text" class="form-control text-center" name="productImg" placeholder="Product Image">
+                            </div>
+                            <div class="form-group">
+                                    <label for="itemDescription"> </label>
+                                    <textarea class="form-control text-center" name="itemDecription" placeholder="Item Description" rows="3"></textarea>
+                                </div>
+                            <button type="submit" class="btn btn-secondary mt-3 mb-5 px-5"><h5 class="mt-1">Submit</h5></button>
+                        </form>
+                        <div class="col-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </body>
+
+    <div id="footer">
+        <% include ../partials/footer %>
+        <script src="/js/managerProfileScript.js"></script>
+    </div>
