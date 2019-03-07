@@ -1,9 +1,13 @@
 module.exports = function(sequelize, DataTypes){
     var Orders = sequelize.define("Orders",{
-        order_id: DataTypes.INTEGER,
-        order_user_id: DataTypes.INTEGER,
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+        },
+        order_user_id: DataTypes.UUID,
+        total_price: DOUBLE,
         status: DataTypes.STRING,
-        date: DataTypes.DATE,
         comment: DataTypes.STRING
     });
     return Orders;
