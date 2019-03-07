@@ -1,9 +1,14 @@
 module.exports = function(sequelize, DataTypes){
-    var ProductCategories = sequelize.define("Product Categories",{
-        category_id: DataTypes.INTEGER,
+    var Categories = sequelize.define("productCategories",{
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+          },
         name: DataTypes.STRING,
-        description: DataTypes.STRING,
-        category_image:DataTypes.STRING //Not sure if this is the right datatype listed for image link
+    },
+    {
+    timestamps: false
     });
-    return ProductCategories;
+    return Categories;
 }
