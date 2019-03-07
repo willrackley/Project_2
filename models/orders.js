@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes){
             primaryKey: true
         },
         order_user_id: DataTypes.UUID,
-        total_price: DOUBLE,
+        total_price: DataTypes.DOUBLE,
         status: DataTypes.STRING,
         comment: DataTypes.STRING
     });
@@ -14,19 +14,19 @@ module.exports = function(sequelize, DataTypes){
     // Added by GG - 03/07 
     // Testing associations of Orders table
 
-    Orders.associate = function(models){
-        //Associate orders with products 
-        // one order has many products
-        Orders.hasMany(models.Products, {
-            onDelete: "cascade"
-        });
+    // Orders.associate = function(models){
+    //     //Associate orders with products 
+    //     // one order has many products
+    //     Orders.hasMany(models.Products, {
+    //         onDelete: "cascade"
+    //     });
 
-        //Associate orders to order details
-        // one order has only one order detail
-        Orders.hasOne(models.DetailedOrder, {
-            onDelete: "cascade"
-        });
-    }; 
+    //     //Associate orders to order details
+    //     // one order has only one order detail
+    //     // Orders.hasOne(models.DetailedOrder, {
+    //     //     onDelete: "cascade"
+    //     // });
+    // }; 
 
     // End of changes 
 
