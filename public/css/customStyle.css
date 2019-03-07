@@ -70,8 +70,16 @@ body {
 }
 
 #menuContainer .card-header {
-    background: #000000;
-    color: #ffffff;
+    background: rgb(199, 199, 199);
+    color: #000000;
+}
+
+.orderCards {
+    border: 2px solid #F5DC47 !important;
+}
+
+.menuCards {
+   
 }
 
 #menuContainer {

@@ -7,12 +7,13 @@ $(document).ready(function(){
     $('#orderHeader').hide();
     $('#priceTotal').hide();
     $('#reviewOrder').hide();
+    $('#comment').hide();
 
     /*=====================FUNCTIONS====================*/
 
     //creates the rows to be displayed in the orders section
     function creatOrderRows(itemChoice){
-        var orderDiv = $('<div class="card mb-2" id='+itemChoice.id+'>');
+        var orderDiv = $('<div class="card mb-2 orderCards" id='+itemChoice.id+'>');
         var cardBody = $('<div class="card-body">');
         var input = $('<input type="number" class="mr-3" min="1" value='+ itemChoice.amount + ' max="10" id="input' + itemChoice.id +'" >');
         var hiddenInput = $('<input type="hidden" class="hidden" value='+ itemChoice.id + '>');
@@ -41,10 +42,8 @@ $(document).ready(function(){
 
     //creates the rows that are going to be displayed in menu section
     function createNewRow(menuItem) {
-        var card = $('<div>');
-        card.addClass('card mb-5');
-        var cardHeader = $('<div>');
-        cardHeader.addClass('card-header w-100');
+        var card = $('<div class="card menuCards mb-5">');
+        var cardHeader = $('<div class="card-header w-100">');
         cardHeader.text(menuItem.name + " " + "|" + " " + menuItem.discount_price);
         var cardBody = $('<div>');
         cardBody.addClass('card-body');
@@ -108,6 +107,8 @@ $(document).ready(function(){
         $('#subtotal').text('$' + sum);
         $('#tax').text('$' + taxPercentage);
         $('#total').text('$' + roundNumber(orderTotal,2));
+
+        
     }
 
      /*=====================LOGIC====================*/
@@ -120,6 +121,7 @@ $(document).ready(function(){
     $(document).on('click', '.addBtn', function(){
         $('#orderHeader').show();
         $('#reviewOrder').show();
+        $('#comment').show();
 
         var inputKey = $(this).attr('key');
         var inputSelector = '#itemAmountInput' + inputKey;
@@ -176,6 +178,14 @@ $(document).ready(function(){
             itemTotals.push(totalCost);
         }
         finalTotal();
+
+        var createOrder = {
+            order_user_id: 1, //need to obtain real user id
+            //menu_id: ?
+            status: "pending",
+            date: "", //possibly moment.js
+            comment: $('#comment').val()
+        }
     });
 
 });

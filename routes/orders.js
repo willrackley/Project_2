@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
 });
 router.post('/add', (req, res) => {
 	db.Orders.create({
-		order_id: req.body.orderId,
-        order_user_id: req.body.orderUserId,
+		order_user_id: req.body.orderUserId,
+		menu_id:req.body.menuId,
         status: req.body.status,
         date: req.body.date,
         comment: req.body.comment
