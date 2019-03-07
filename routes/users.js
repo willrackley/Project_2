@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 
 // Route to handle user registration
 router.post('/register', (req, res) => {
-	console.log(req.body);
 	let {
 		name,
 		email,

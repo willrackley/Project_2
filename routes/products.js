@@ -2,12 +2,61 @@
 const express = require('express');
 const db = require("../models");
 const router = express.Router();
+const {
+	customerAuthenticated,
+	managerAuthenticated,
+	isLogged
+} = require('../config/auth');
+// @route    app/products
+// @desc     Test route to see all products as object
+// @access   Public
 router.get('/', (req, res) => {
 	db.Products.findAll({}).then(results => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
 });
+
+// @route    app/products/categories
+// @desc     Pull product categories from database
+// @access   Manager
+router.get('/categories', (req, res) => {
+	db.productCategories.findAll({}).then(results => {
+		res.send(results);
+	}).catch(err => console.log(err));
+});
+
+// @route    app/products/categories/add
+// @desc     Add menu category to database
+// @access   Only Manager
+router.post('/categories/add', managerAuthenticated, (req, res) => {
+	var categoryName = req.body.categoryName;
+	if (categoryName === '') {
+		req.flash('error_msg', 'Category name can not be empty!');
+		res.redirect('/app/dashboard/manager/add-menu-category');
+	} else {
+		// Make lower case and first letter capital
+		categoryName = categoryName.toLowerCase();
+		categoryName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+		// Add if doesn't exist in database with same name
+		db.productCategories.findOrCreate({
+			where: {
+				name: categoryName
+			}
+		}).spread((user, created) => {
+			if (!created) {
+				req.flash('error_msg', 'Category with this name already exists');
+				res.redirect('/app/dashboard/manager/add-menu-category');
+			} else {
+				req.flash('success_msg', 'Category successfully created');
+				res.redirect('/app/dashboard/manager/add-menu-category');
+			}
+		})
+	}
+});
+// @route    app/products/add
+// @desc     Add form input (product) in database
+// @access   Only Manager
 router.post('/add', (req, res) => {
 	db.Products.create({
 		name: req.body.itemName,

@@ -40,4 +40,11 @@ var menuItems;
     }
     getMenu();
 
+    // Get Categories From Database And Add To Select List
+$(document).ready(function(){
+    $.get('/app/products/categories', function(data) {
+        console.log(data);
+    });
+});
+
     
