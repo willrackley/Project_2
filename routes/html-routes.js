@@ -29,10 +29,6 @@ module.exports = function(app) {
 	app.get("/manager-dashboard", function(req, res) {
 		res.sendFile(path.join(__dirname, "../public/managerDashboard.html"));
 	});
-	// this route has to be moved or deleted products (app/products/app)
-	app.get("/add-menu-item", function(req, res) {
-		res.sendFile(path.join(__dirname, "../public/addMenuItem.html"));
-	});
 	// --- added by GG - 03/05-2:55pm
 	// this is to display orders form (app/orders)
 	app.get("/customerOrders", function(req, res) {

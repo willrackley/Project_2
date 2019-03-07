@@ -1,10 +1,16 @@
 module.exports = function(sequelize, DataTypes){
     var Products = sequelize.define("Products",{
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+          },
+        category_id: DataTypes.UUID,
         name: DataTypes.STRING,
         description: DataTypes.STRING,
+        regular_price: DataTypes.DOUBLE,
         discount_price: DataTypes.DOUBLE,
-        category_id: DataTypes.INTEGER,
-        product_image:DataTypes.STRING //Not sure if this is the right datatype listed for image link
+        product_image:DataTypes.STRING
     });
     return Products;
 }

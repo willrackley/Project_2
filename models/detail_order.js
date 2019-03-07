@@ -1,9 +1,9 @@
 module.exports = function(sequelize, DataTypes){
-    var DetailedOrder = sequelize.define("DetailedOrder", {
-        order_id: DataTypes.INTEGER,
-        product_id: DataTypes.INTEGER,
+    var DetailOrder = sequelize.define("detailOrder", {
+        order_id: DataTypes.UUID,
+        product_id: DataTypes.UUID,
         quantity: DataTypes.INTEGER,
         total_price: DataTypes.DOUBLE
     });
-    return DetailedOrder;
+    return DetailOrder;
 }
