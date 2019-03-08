@@ -95,10 +95,6 @@ $(document).ready(function(){
         });
     }
     
-    function postDetailedOrder(detailedOrder){
-        $.post("/app/orders/add/detailed", detailedOrder, function() {  
-        });
-    }
 
     //displays selected menu item in the orders section
     function displayOrders(){
@@ -135,15 +131,16 @@ $(document).ready(function(){
     }
 
      /*=====================LOGIC====================*/
-
-    $('#userScanQRcode').on('click', function(){
-        getMenu();
-    });
+     getMenu();
+    // $('#userScanQRcode').on('click', function(){
+    //     
+    // });
 
     //click event that adds menu item to the users order
     $(document).on('click', '.addBtn', function(){
         $('#orderHeader').show();
         $('#reviewOrder').show();
+        $('#priceTotal').hide();
         $('#comment').show();
 
         var inputKey = $(this).attr('key');
@@ -195,6 +192,7 @@ $(document).ready(function(){
 
     $(document).on('click', '#reviewOrder', function(){
         $('#priceTotal').show();
+        itemTotals = [];
         for(var i=0; i < cart.length; i++){
             var selector = '#input'+ cart[i].id;
             var totalCost = $(selector).val() * cart[i].price;

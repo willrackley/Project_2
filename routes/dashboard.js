@@ -21,9 +21,18 @@ router.get("/manager/add-menu-item", managerAuthenticated, function(req, res) {
     res.render('pages/addMenuItem');
 });
 
+
+router.get("/manager/kitchen-dashboard", managerAuthenticated, function(req, res) {
+    //console.log(req.user.id);
+    res.sendFile(path.join(__dirname, "../public/kitchen_dashboard.html"));
+});
+
+
+
 router.get("/manager/edit-menu-item", managerAuthenticated, function(req, res) {
     res.render('pages/editMenuItem');
 });
+
 
 // CUSTOMER ROUTES - all routes associated with customer
 router.get('/customer', customerAuthenticated, (req, res) => {
