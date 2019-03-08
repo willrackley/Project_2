@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Easy Eats: Add Menu Item</title>
+        <% include ../partials/head %>
+    </head>
+
+    <body>
+        <% include ../partials/manager-header %>
+        <div class="container my-5">
+                <h3 class="border-bottom p-1 mb-4">Edit Product Information</h3>
+                <div class="row">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                            <% include ../partials/messages %>
+                        <form class="text-center" id="addMenuItem" method="POST" action="/app/products/edit">
+                            <div class="form-group">
+                                <select class="form-control" name="productId" id="select-product" required>
+                                    <option value="" selected disabled>Select Menu Item</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemName">Product ID</label>
+                                <input type="text" class="form-control text-center" id="productId" name="productId" placeholder="Product ID" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemName">Product Name</label>
+                                <input type="text" class="form-control text-center" id="itemName" name="itemName" placeholder="Item Name">
+                            </div>
+                            <div class="form-group">
+                                    <label for="regularPrice">Regular Price</label>
+                                    <input type="text" class="form-control text-center" id="regularPrice" name="regularPrice" placeholder="Regular Price">
+                                </div>
+                            <div class="form-group">
+                                <label for="discountPrice">Discount Price</label>
+                                <input type="text" class="form-control text-center" id="discountPrice" name="discountPrice" placeholder="Discount Price">
+                            </div>
+                            <div class="form-group">
+                                <label for="productImg">Image Name</label>
+                                <input type="text" class="form-control text-center" id="productImg" name="productImg" placeholder="Product Image">
+                            </div>
+                            <div class="form-group">
+                                    <label for="itemDescription">Description</label>
+                                    <textarea class="form-control text-center" id="itemDecription" name="itemDecription" placeholder="Item Description" rows="3"></textarea>
+                                </div>
+                            <button type="submit" name="action" value="update" class="btn btn-secondary mt-3 mb-5 px-5"><h5 class="mt-1">Update</h5></button>
+                            <button type="submit" name="action" value="delete" class="btn btn-danger mt-3 mb-5 px-5"><h5 class="mt-1">Delete</h5></button>
+                        </form>
+                        <div class="col-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </body>
+
+    <div id="footer">
+        <% include ../partials/footer %>
+        <script src="/js/managerProfileScript.js"></script>
+    </div>
