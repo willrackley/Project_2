@@ -70,10 +70,21 @@ body {
 }
 
 #aboutSection {
-    margin-top: 300px;
-    background: #cccccc;
+    margin-top: 350px;
+    
 }
 
+.aboutUsPg {
+    line-height: 1.6;
+}
+
+h1 .fa-stopwatch {
+    font-size: 100px;
+}
+
+h1 .fa-pizza-slice {
+    font-size: 100px;
+}
 
 .orderCards {
     border: 2px solid #F5DC47 !important;
@@ -96,5 +107,9 @@ body {
 #footer {
     /* position: fixed; */
     bottom: 0;
-    width: 100%;
+    width: 100%; 
+}
+
+footer .footer-copyright {
+    background: #ffffff !important;
 }

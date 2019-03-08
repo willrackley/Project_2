@@ -39,6 +39,7 @@ router.get('/customer', customerAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../public/userProfile.html"));
 });
 
+
 // FUTURE KITCHEN ROUTES - all routes associated with kitchen
 // router.get('/kitchen', customerAuthenticated, (req, res) => {
 //     res.sendFile(path.join(__dirname, "../public/userProfile.html"));
