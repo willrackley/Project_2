@@ -15,28 +15,19 @@ router.get('/', (req, res) => {
 // Get orders, join with product id and orders-detailed
 // NOT WORKING
 //@route: /app/orders/customerDash
-router.get('/customerDash', function(req, res) {
-    // Add a join to include all of the orders-details here
-    db.Orders.findAll({
-      include: [db.DetailedOrder]
-    }).then(results => {
-	  res.json(results);
-	  res.end();
-    }).catch(err => console.log(err));
-  });
+// router.get('/customerDash', function(req, res) {
+//     // Add a join to include all of the orders-details here
+//     db.Orders.findAll({
+//       include: [db.DetailedOrder]
+//     }).then(results => {
+// 	  res.json(results);
+// 	  res.end();
+//     }).catch(err => console.log(err));
+//   });
+
 
 	// end of changes by German
 	
-router.get("/:id", function(req, res){
-	db.Orders.findOne({
-		where: {
-			id: req.params.id
-		}
-		}).then(function(results) {
-			res.json(results);
-		});
-});
-
 router.post('/add', (req, res) => {
 	db.Orders.create({
 		order_user_id: req.user.id,
