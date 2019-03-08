@@ -1,16 +1,20 @@
 # Project_2
 Project 2 GA Tech Bootcamp group project 
 
-Instructions
+*********Easy Eats*********
 
-Run npm init and installs
- -express
- -sequelize
+A progressive web application that makes it easy for hungry customers to take immdiate action. Ultimately improving the customer experience during the users visit to a restaurant.
 
-Create Database 
 
-Adjust your config file
+**********Contact**********
+If you have any problems, question, ideas, or suggestions please contact us how you see fit:
 
-Run Server.js
+Will Rackley - willrackley65@gmail.com
+Natosha Martin - nmsuri28@gmail.com
 
-Run menu.sql through workbench
+**********Deployed Heroku**********
+
+
+
+
+**********Website**********
