@@ -2,6 +2,7 @@
 const express = require('express');
 const db = require("../models");
 const router = express.Router();
+var FullOrders = [];
 
 // Get all the orders
 router.get('/', (req, res) => {
@@ -24,8 +25,6 @@ router.get('/', (req, res) => {
 // 	  res.end();
 //     }).catch(err => console.log(err));
 //   });
-
-
 	// end of changes by German
 	
 router.post('/add', (req, res) => {
@@ -40,8 +39,8 @@ router.post('/add', (req, res) => {
 	}).catch(err => console.log(err));
 });
 
-router.get('/add/detailed', (req, res) => {
-	db.DetailedOrder.findAll({}).then(results => {
+router.get('/detailed', (req, res) => {
+	db.detailOrders.findAll({}).then(results => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
@@ -60,6 +59,73 @@ router.post('/add/detailed', (req, res) => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
+});
+
+router.get('/kitchen', (req, res) => {  
+	var FullOrders = [];
+	var DetailOrders = [];
+	
+	db.Orders.findAll({}).then(results => {
+
+		for(var i=0; i < results.length; i++){
+			FullOrders.push(results[i].get({plain: true}));
+			FullOrders[i].detailProducts = [];
+		}
+		
+
+		db.detailOrders.findAll({}).then(data => {
+				for(var j=0; j < data.length; j++){
+					DetailOrders.push(data[j].get());
+				}
+
+		for (var x = 0; x < FullOrders.length; x++) {
+			for (var y =0; y < DetailOrders.length; y++) {
+				if (FullOrders[x].id === DetailOrders[y].order_id) {
+					FullOrders[x].detailProducts.push(DetailOrders[y]);
+				}
+			}
+		}
+
+		res.json(FullOrders);
+
+		});
+		});
+
+
+
+
+
+	// }).catch(err => console.log(err));
+});
+
+// link: /app/orders/by-user
+router.get('/by-user', (req, res) => {
+	db.User.findAll({
+		include: [{
+			model: db.Orders,
+			include: [{
+				model: db.detailOrders,
+					include: [{
+						model: db.Products,
+					}]
+			}]
+		}]
+	}).then(users => {
+		res.send(users);
+	});
+});
+
+router.get('/kitchen', (req, res) => {
+	db.Orders.findAll({
+		include: [{
+			model: db.detailOrders,
+				include: [{
+					model: db.Products,
+				}]
+		}]
+	}).then(orders => {
+		res.send(orders);
+	});
 });
 
 module.exports = router;
