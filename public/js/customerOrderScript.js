@@ -6,7 +6,7 @@ var orderItems;
 //        $.get('/app/orders', function(data) {
 
         // line to test the join with order details
-        $.get('/app/orders/customerDash', function(data) {
+        $.get('/app/orders/view-order', function(data) {
                 orderItems = data;
             console.log(orderItems)
             initializeRows();

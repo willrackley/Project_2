@@ -30,8 +30,8 @@ module.exports = function(app) {
 		res.sendFile(path.join(__dirname, "../public/managerDashboard.html"));
 	});
 	// --- added by GG - 03/05-2:55pm
-	// this is to display orders form (app/orders)
-	app.get("/customerOrders", function(req, res) {
+	// this is to display customer orders form (app/orders)
+	app.get("/customer/view-orders", function(req, res) {
 		res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
 	});
 	// -- end of edits by GG

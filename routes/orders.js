@@ -25,19 +25,8 @@ router.get('/', (req, res) => {
 // 	  res.end();
 //     }).catch(err => console.log(err));
 //   });
-
 	// end of changes by German
 	
-// router.get("/:id", function(req, res){
-// 	db.Orders.findOne({
-// 		where: {
-// 			id: req.params.id
-// 		}
-// 		}).then(function(results) {
-// 			res.json(results);
-// 		});
-// });
-
 router.post('/add', (req, res) => {
 	db.Orders.create({
 		order_user_id: req.user.id,
