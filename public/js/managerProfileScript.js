@@ -4,11 +4,17 @@ var menuItems;
     function getMenu() {
         $.get('/app/products', function(data) {
             menuItems = data;
+            productcategories = data;
             console.log(menuItems)
             initializeRows();
         });
     }
 
+    //function to display order total in 00.00 format
+  function roundNumber(num,n){
+      return parseFloat(Math.round(num * Math.pow(10, n)) /Math.pow(10,n)).toFixed(n);
+    }
+     
     function initializeRows() {
         var itemsToAdd = [];
         for (var i = 0; i < menuItems.length; i++) {
@@ -17,17 +23,19 @@ var menuItems;
         $('#menuContainer').append(itemsToAdd);
     }
 
+   
+
     function createNewRow(menuItems) {
         var tableRow =$('<tr>');
-        var id =$('<th scope="row">');
-        id.text(menuItems.id);
+        //var id =$('<th scope="row">');
+        //id.text(menuItems.id);
         var item=$('<td>');
         item.text(menuItems.name);
         var price=$('<td>');
-        price.text(menuItems.discount_price);
+        price.text('$' + roundNumber(menuItems.regular_price,2));
         var category=$('<td>');
-        category.text(menuItems.category_id);
-        tableRow.append(id);
+        category.text(productcategories.name);
+        //tableRow.append(id);
         tableRow.append(item);
         tableRow.append(price);
         tableRow.append(category);
