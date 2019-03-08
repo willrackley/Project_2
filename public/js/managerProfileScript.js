@@ -4,7 +4,7 @@ var menuItems;
 
     //function that grabs all api information
     function getMenu() {
-        $.get('/app/products', function(data) {
+        $.get('/app/products/by-category', function(data) {
             menuItems = data;
             productcategories = data;
             console.log(menuItems)
@@ -36,7 +36,7 @@ var menuItems;
         var price=$('<td>');
         price.text('$' + roundNumber(menuItems.regular_price,2));
         var category=$('<td>');
-        category.text(productcategories.name);
+        category.text(menuItems.productCategory.name);
         //tableRow.append(id);
         tableRow.append(item);
         tableRow.append(price);
