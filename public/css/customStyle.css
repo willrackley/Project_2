@@ -71,7 +71,6 @@ body {
 
 #aboutSection {
     margin-top: 350px;
-    
 }
 
 .aboutUsPg {
@@ -112,4 +111,31 @@ h1 .fa-pizza-slice {
 
 footer .footer-copyright {
     background: #ffffff !important;
+}
+
+/* ========== Media Query =========== */
+
+@media screen and (max-width: 425px){
+    #homeJumbotron {
+        background-image: url("../images/burger1\ \(1\).png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        height: 700px;
+
+    }
+
+    #titleContainer {
+        margin-top: 110px !important;
+        
+    }
+
+    #scanQRcode {
+        color: #000000;
+        background: #F5DC47;
+        
+    }
+
+    #aboutSection {
+        margin-top: 170px;
+    }
 }
