@@ -2,6 +2,7 @@
 const express = require('express');
 const db = require("../models");
 const router = express.Router();
+var FullOrders = [];
 
 // Get all the orders
 router.get('/', (req, res) => {
@@ -15,27 +16,27 @@ router.get('/', (req, res) => {
 // Get orders, join with product id and orders-detailed
 // NOT WORKING
 //@route: /app/orders/customerDash
-router.get('/customerDash', function(req, res) {
-    // Add a join to include all of the orders-details here
-    db.Orders.findAll({
-      include: [db.DetailedOrder]
-    }).then(results => {
-	  res.json(results);
-	  res.end();
-    }).catch(err => console.log(err));
-  });
+// router.get('/customerDash', function(req, res) {
+//     // Add a join to include all of the orders-details here
+//     db.Orders.findAll({
+//       include: [db.DetailedOrder]
+//     }).then(results => {
+// 	  res.json(results);
+// 	  res.end();
+//     }).catch(err => console.log(err));
+//   });
 
 	// end of changes by German
 	
-router.get("/:id", function(req, res){
-	db.Orders.findOne({
-		where: {
-			id: req.params.id
-		}
-		}).then(function(results) {
-			res.json(results);
-		});
-});
+// router.get("/:id", function(req, res){
+// 	db.Orders.findOne({
+// 		where: {
+// 			id: req.params.id
+// 		}
+// 		}).then(function(results) {
+// 			res.json(results);
+// 		});
+// });
 
 router.post('/add', (req, res) => {
 	db.Orders.create({
@@ -49,8 +50,8 @@ router.post('/add', (req, res) => {
 	}).catch(err => console.log(err));
 });
 
-router.get('/add/detailed', (req, res) => {
-	db.DetailedOrder.findAll({}).then(results => {
+router.get('/detailed', (req, res) => {
+	db.detailOrders.findAll({}).then(results => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
@@ -69,6 +70,61 @@ router.post('/add/detailed', (req, res) => {
 		res.json(results);
 		res.end();
 	}).catch(err => console.log(err));
+});
+
+router.get('/kitchen', (req, res) => {  
+	var FullOrders = [];
+	var DetailOrders = [];
+	
+	db.Orders.findAll({}).then(results => {
+
+		for(var i=0; i < results.length; i++){
+			FullOrders.push(results[i].get({plain: true}));
+			FullOrders[i].detailProducts = [];
+		}
+		
+
+		db.detailOrders.findAll({}).then(data => {
+				for(var j=0; j < data.length; j++){
+					DetailOrders.push(data[j].get());
+				}
+
+		for (var x = 0; x < FullOrders.length; x++) {
+			for (var y =0; y < DetailOrders.length; y++) {
+				if (FullOrders[x].id === DetailOrders[y].order_id) {
+					FullOrders[x].detailProducts.push(DetailOrders[y]);
+				}
+			}
+		}
+
+		res.json(FullOrders);
+
+		});
+
+
+		});
+
+				// for (var x=0; x < FullOrders.length; x++) {
+				// 	console.log(x + ' full orders id is ' + FullOrders[x].id)
+				// 	for (var j=0; j < DetailOrder.length; j++) {
+				// 		console.log(j + ' detail order id is ' + DetailOrder[j].order_id)
+				// 	}
+				// }
+
+		// for (var x=0; x < FullOrders.length; x++) {
+		// 	for (var j=0; j < DetailOrder.length; j++) {
+		// 		console.log(i + ' full orders id is ' + FullOrders[x].id)
+		// 		console.log(j + ' detail order id is ' + DetailOrder[j].order_id)
+		// 		if (FullOrders[x].id === DetailOrder[j].order_id) {
+		// 			FullOrders[x].detailProducts.push(DetailOrder[j]);
+		// 		}
+		// 	}
+		// }
+
+
+
+
+	// }).catch(err => console.log(err));
 });
 
 module.exports = router;
