@@ -34,4 +34,9 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+//Joins for user's orders
+db.User.hasMany(db.Orders, {foreignKey: 'order_user_id'});
+db.Orders.hasMany(db.detailOrders, {foreignKey: 'order_id'});
+db.detailOrders.belongsTo(db.Products, {foreignKey: 'product_id'});
+
 module.exports = db;

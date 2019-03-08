@@ -100,31 +100,31 @@ router.get('/kitchen', (req, res) => {
 		res.json(FullOrders);
 
 		});
-
-
 		});
 
-				// for (var x=0; x < FullOrders.length; x++) {
-				// 	console.log(x + ' full orders id is ' + FullOrders[x].id)
-				// 	for (var j=0; j < DetailOrder.length; j++) {
-				// 		console.log(j + ' detail order id is ' + DetailOrder[j].order_id)
-				// 	}
-				// }
-
-		// for (var x=0; x < FullOrders.length; x++) {
-		// 	for (var j=0; j < DetailOrder.length; j++) {
-		// 		console.log(i + ' full orders id is ' + FullOrders[x].id)
-		// 		console.log(j + ' detail order id is ' + DetailOrder[j].order_id)
-		// 		if (FullOrders[x].id === DetailOrder[j].order_id) {
-		// 			FullOrders[x].detailProducts.push(DetailOrder[j]);
-		// 		}
-		// 	}
-		// }
 
 
 
 
 	// }).catch(err => console.log(err));
+});
+
+// Testing Joined Data
+// link: /app/orders/by-user
+router.get('/by-user', (req, res) => {
+	db.User.findAll({
+		include: [{
+			model: db.Orders,
+			include: [{
+				model: db.detailOrders,
+					include: [{
+						model: db.Products,
+					}]
+			}]
+		}]
+	}).then(users => {
+		res.send(users);
+	});
 });
 
 module.exports = router;
