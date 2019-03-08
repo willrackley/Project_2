@@ -61,42 +61,42 @@ router.post('/add/detailed', (req, res) => {
 	}).catch(err => console.log(err));
 });
 
-router.get('/kitchen', (req, res) => {  
-	var FullOrders = [];
-	var DetailOrders = [];
+// router.get('/kitchen', (req, res) => {  
+// 	var FullOrders = [];
+// 	var DetailOrders = [];
 	
-	db.Orders.findAll({}).then(results => {
+// 	db.Orders.findAll({}).then(results => {
 
-		for(var i=0; i < results.length; i++){
-			FullOrders.push(results[i].get({plain: true}));
-			FullOrders[i].detailProducts = [];
-		}
+// 		for(var i=0; i < results.length; i++){
+// 			FullOrders.push(results[i].get({plain: true}));
+// 			FullOrders[i].detailProducts = [];
+// 		}
 		
 
-		db.detailOrders.findAll({}).then(data => {
-				for(var j=0; j < data.length; j++){
-					DetailOrders.push(data[j].get());
-				}
+// 		db.detailOrders.findAll({}).then(data => {
+// 				for(var j=0; j < data.length; j++){
+// 					DetailOrders.push(data[j].get());
+// 				}
 
-		for (var x = 0; x < FullOrders.length; x++) {
-			for (var y =0; y < DetailOrders.length; y++) {
-				if (FullOrders[x].id === DetailOrders[y].order_id) {
-					FullOrders[x].detailProducts.push(DetailOrders[y]);
-				}
-			}
-		}
+// 		for (var x = 0; x < FullOrders.length; x++) {
+// 			for (var y =0; y < DetailOrders.length; y++) {
+// 				if (FullOrders[x].id === DetailOrders[y].order_id) {
+// 					FullOrders[x].detailProducts.push(DetailOrders[y]);
+// 				}
+// 			}
+// 		}
 
-		res.json(FullOrders);
+// 		res.json(FullOrders);
 
-		});
-		});
-
-
+// 		});
+// 		});
 
 
 
-	// }).catch(err => console.log(err));
-});
+
+
+// 	// }).catch(err => console.log(err));
+// });
 
 // link: /app/orders/by-user
 router.get('/by-user', (req, res) => {
