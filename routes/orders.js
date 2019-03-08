@@ -109,7 +109,6 @@ router.get('/kitchen', (req, res) => {
 	// }).catch(err => console.log(err));
 });
 
-// Testing Joined Data
 // link: /app/orders/by-user
 router.get('/by-user', (req, res) => {
 	db.User.findAll({
@@ -124,6 +123,19 @@ router.get('/by-user', (req, res) => {
 		}]
 	}).then(users => {
 		res.send(users);
+	});
+});
+
+router.get('/kitchen', (req, res) => {
+	db.Orders.findAll({
+		include: [{
+			model: db.detailOrders,
+				include: [{
+					model: db.Products,
+				}]
+		}]
+	}).then(orders => {
+		res.send(orders);
 	});
 });
 
