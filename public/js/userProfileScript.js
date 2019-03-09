@@ -202,6 +202,12 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '#testBtn', function(){
+
+        $('#orderHeader').hide();
+        $('#priceTotal').hide();
+        $('#reviewOrder').hide();
+        $('#comment').hide();
+        $('#orderSection').hide();
         var costIndex = postedCost.length - 1;
 
         var createOrder = {
