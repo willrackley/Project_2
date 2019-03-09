@@ -64,6 +64,30 @@ $(document).ready(function(){
        
     }
 
+    function updateOrder(newOrder) {
+        $.ajax({
+          method: "PUT",
+          url: "/app/orders",
+          data: newOrder
+        })
+          .then(function() {
+            $('#status' + $(this).val()).text("STATUS: " + $(this).text());
+          });
+      }
+
     getOrders();
+
+    $(document).on('click', '#kitchen-action', function(){
+        var newOrder = {
+            id: $(this).val(),
+            order_user_id: $(this).attr('user_id'),
+            total_price: $(this).attr('price'),
+            status: $(this).text(),
+            comment: $(this).attr('comment')
+        }
+
+        updateOrder(newOrder);
+
+    });
     
 });

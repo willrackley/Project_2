@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const router = express.Router();
 
+// Function to assign actual table id by customer's scanned QR
 function assignTableId(idFromForm) {
 	if (idFromForm === 'A1A2A3A4A5') {
 		return 'B1'
@@ -17,15 +18,9 @@ function assignTableId(idFromForm) {
 	}
 }
 
-// Router just for testing to see all users
-router.get('/', (req, res) => {
-	db.User.findAll({}).then(results => {
-		res.json(results);
-		res.end();
-	}).catch(err => console.log(err));
-});
-
-// Route to handle user registration
+// @route    app/users/add
+// @desc     User registration route
+// @access   Public
 router.post('/register', (req, res) => {
 	let {
 		name,
@@ -97,38 +92,49 @@ router.post('/register', (req, res) => {
 		})
 	}
 });
-// Login route app/users/login
+
+// @route    app/users/login
+// @desc     User login route, sessions and table assigment included here
+// @access   Public
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', function(err, user, info) {
-		if (err) { return next(err); }
+		if (err) {
+			return next(err);
+		}
 		if (!user) {
 			req.flash('error', info.message);
 			req.flash('table_number', req.body.qrtnrtbl)
-			return res.redirect('/login'); 
+			return res.redirect('/login');
 		}
 		req.logIn(user, function(err) {
-		  if (err) { return next(err); }
-		  if (user.user_group === 'customer' && req.body.qrtnrtbl !== '') {
-			var tableNumber = assignTableId(req.body.qrtnrtbl);
-			db.User.update({
-				table_loc: tableNumber,
-			}, {
-				where: {
-					id: req.user.id
-				}
-			}).then (results => {
-				return res.redirect('/app/dashboard/customer');
-			});
-		  } else {
-			return res.redirect('/app/dashboard');
-		  }
+			if (err) {
+				return next(err);
+			}
+			if (user.user_group === 'customer' && req.body.qrtnrtbl !== '') {
+				var tableNumber = assignTableId(req.body.qrtnrtbl);
+				db.User.update({
+					table_loc: tableNumber,
+				}, {
+					where: {
+						id: req.user.id
+					}
+				}).then(results => {
+					return res.redirect('/app/dashboard/customer');
+				});
+			} else {
+				return res.redirect('/app/dashboard');
+			}
 		});
-	  })(req, res, next);
+	})(req, res, next);
 });
 
+// @route    app/users/logout
+// @desc     User logout route
+// @access   For all user groups
 router.get('/logout', function(req, res) {
 	req.logout();
 	req.flash('success_msg', 'You are successfully logged out');
 	res.redirect('/login');
 });
+
 module.exports = router;

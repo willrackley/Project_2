@@ -2,56 +2,61 @@
 const express = require('express');
 const router = express.Router();
 var path = require("path");
-const { customerAuthenticated, managerAuthenticated, isLogged } = require('../config/auth');
+const { customerAuthenticated, managerAuthenticated, kitchenAuthenticated, isLogged } = require('../config/auth');
 
-// MAIN DASHBOARD ROUTE 
+// @route    app/dashboard
+// @desc     Update route, to update order STATUS
+// @access   All Users
 router.get('/', isLogged, (req, res) => {
 });
 
-// MANAGER ROUTES - all routes associated with manager 
+// @route    app/dashboard/manager
+// @desc     Manager Dashboard
+// @access   Manager
 router.get('/manager', managerAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../public/managerDashboard.html"));
 });
 
+// @route    app/dashboard/manager/add-menu-category
+// @desc     Add Menu Category Display
+// @access   Manager
 router.get('/manager/add-menu-category', managerAuthenticated, (req, res) => {
     res.render('pages/addMenuCategory');
 });
 
+// @route    app/dashboard/manager/add-menu-item
+// @desc     Add Menu Item Display
+// @access   Manager
 router.get("/manager/add-menu-item", managerAuthenticated, function(req, res) {
     res.render('pages/addMenuItem');
 });
 
-
-router.get("/manager/kitchen-dashboard", managerAuthenticated, function(req, res) {
-    //console.log(req.user.id);
-    res.sendFile(path.join(__dirname, "../public/kitchen_dashboard.html"));
-});
-
-
-
+// @route    app/dashboard/manager/edit-menu-item
+// @desc     Add Menu Item Display
+// @access   Manager
 router.get("/manager/edit-menu-item", managerAuthenticated, function(req, res) {
     res.render('pages/editMenuItem');
 });
 
-
-// CUSTOMER ROUTES - all routes associated with customer
+// @route    app/dashboard/customer
+// @desc     Customers dashboard
+// @access   Customer
 router.get('/customer', customerAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../public/userProfile.html"));
 });
 
-
-// --- added by GG - 03/05-2:55pm
-// this is to display customer orders form (app/orders/by-user)
-//router.get("/customer/orders/by-user", function(req, res) {
-router.get("/customer/orders/by-user", customerAuthenticated, (req, res) => {
-	res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
+// @route    app/dashboard/customer/orders
+// @desc     Customers Last Order
+// @access   Customer
+router.get('/customer/orders', customerAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
 });
-// -- end of edits by GG
 
-
-// FUTURE KITCHEN ROUTES - all routes associated with kitchen
-// router.get('/kitchen', customerAuthenticated, (req, res) => {
-//     res.sendFile(path.join(__dirname, "../public/userProfile.html"));
-// });
+// @route    app/dashboard/kitchen
+// @desc     Kitchen Dashboard
+// @access   Kitchen
+router.get("/kitchen", kitchenAuthenticated, function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/kitchen_dashboard.html"));
+});
 
 module.exports = router;
