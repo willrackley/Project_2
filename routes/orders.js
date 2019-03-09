@@ -80,13 +80,6 @@ router.post('/add/detailed', (req, res) => {
 	// }).catch(err => console.log(err));
 //});
 
-
-
-
-
-
-
-
 // link: /app/orders/by-user
 router.get('/by-user/', (req, res) => {
 	db.User.findAll({
@@ -137,5 +130,18 @@ router.get('/kitchen', (req, res) => {
 		res.send(orders);
 	});
 });
+
+// PUT route for updating posts
+router.put("/", function(req, res) {
+    db.Orders.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(orders) {
+      res.json(orders);
+    });
+  });
 
 module.exports = router;

@@ -70,8 +70,8 @@ var menuItems;
         var card = $('<div class="card managerMenuCards mb-5">');
         var cardHeader = $('<div class="card-header kitchenCardHeader w-100">');
         var cardBody = $('<div class="card-body p-3">');
-        var status = $('<div class="mt-1">');
-        status.text('STATUS: pending');
+        var status = $('<div class="mt-1 font-weight-bold h4">');
+        status.text('STATUS: ' + orderData.status);
         var btnDiv = $('<div class="text-center">')
         var redBtn = $('<button class="btn btn-danger RedButton mx-1 mt-2">');
         redBtn.attr('id', 'kitchen-action');
