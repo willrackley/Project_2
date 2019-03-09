@@ -11,21 +11,6 @@ router.get('/', (req, res) => {
 		res.end();
 	}).catch(err => console.log(err));
 });
-
-// added by German - 03/07
-// Get orders, join with product id and orders-detailed
-// NOT WORKING
-//@route: /app/orders/customerDash
-// router.get('/customerDash', function(req, res) {
-//     // Add a join to include all of the orders-details here
-//     db.Orders.findAll({
-//       include: [db.DetailedOrder]
-//     }).then(results => {
-// 	  res.json(results);
-// 	  res.end();
-//     }).catch(err => console.log(err));
-//   });
-	// end of changes by German
 	
 router.post('/add', (req, res) => {
 	db.Orders.create({
@@ -91,15 +76,11 @@ router.get('/kitchen', (req, res) => {
 		});
 		});
 
-
-
-
-
 	// }).catch(err => console.log(err));
 });
 
 // link: /app/orders/by-user
-router.get('/by-user', (req, res) => {
+router.get('/by-user/', (req, res) => {
 	db.User.findAll({
 		include: [{
 			model: db.Orders,
@@ -109,11 +90,32 @@ router.get('/by-user', (req, res) => {
 						model: db.Products,
 					}]
 			}]
+			//where: {order_user_id:  req.User.id }
 		}]
 	}).then(users => {
+		//console.log(req.User.id); 
 		res.send(users);
 	});
 });
+
+// router.get('/by-user', (req, res) => {
+
+// 	db.User.findAll({
+// 		include: [{
+// 			model: db.Orders,
+// 			include: [{
+// 				model: db.detailOrders,
+// 					include: [{
+// 						model: db.Products,
+// 					}]
+// 			}]
+// 			//where: {order_user_id:  req.User.id }
+// 		}]
+// 	}).then(users => {
+// 		//console.log(req.User.id); 
+// 		res.send(users);
+// 	});
+// });
 
 router.get('/kitchen', (req, res) => {
 	db.Orders.findAll({
