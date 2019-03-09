@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Easy Eats: Add Menu Item</title>
+        <title>Easy Eats: Edit Menu Item</title>
         <% include ../partials/head %>
     </head>
 
@@ -10,9 +10,9 @@
         <div class="container my-5">
                 <h3 class="border-bottom p-1 mb-4">Edit Product Information</h3>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-md-4 col-sm-12">
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4 col-sm-12">
                             <% include ../partials/messages %>
                         <form class="text-center" id="addMenuItem" method="POST" action="/app/products/edit">
                             <div class="form-group">
@@ -47,7 +47,7 @@
                             <button type="submit" name="action" value="update" class="btn btn-secondary mt-3 mb-5 px-5"><h5 class="mt-1">Update</h5></button>
                             <button type="submit" name="action" value="delete" class="btn btn-danger mt-3 mb-5 px-5"><h5 class="mt-1">Delete</h5></button>
                         </form>
-                        <div class="col-4">
+                        <div class="col-md-4 col-sm-12">
                         </div>
                     </div>
                 </div>
