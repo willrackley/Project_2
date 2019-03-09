@@ -1,12 +1,21 @@
 var path = require("path");
-const { isLogged } = require('../config/auth');
+var tableNumber;
+const {
+	isLogged
+} = require('../config/auth');
 
 module.exports = function(app) {
-	// Index page route /
+
+	// @route    /
+	// @desc     Home Page
+	// @access   Public
 	app.get("/", function(req, res) {
 		res.sendFile(path.join(__dirname, "../public/index.html"));
 	});
-	// Login page route /login
+
+	// @route    /login
+	// @desc     User's Login Page
+	// @access   Public
 	app.get("/login", function(req, res) {
 		if (req.user) {
 			if (req.user.user_group === "customer") {
@@ -17,28 +26,44 @@ module.exports = function(app) {
 				res.redirect('/app/dashboard/kitchen');
 			}
 		} else {
-		res.render('pages/login');
-		// res.sendFile(path.join(__dirname, "../public/userProfile.html"));
+			res.render('pages/login');
 		}
 	});
-	// this route has to be moved or deleted dashboard.js (app/dashboard/customer)
-	app.get("/profile", function(req, res) {
-		res.sendFile(path.join(__dirname, "../public/userProfile.html"));
-	});
-	// this route has to be moved or deleted dashboard.js file (app/dashboard/manager)
-	app.get("/manager-dashboard", function(req, res) {
-		res.sendFile(path.join(__dirname, "../public/managerDashboard.html"));
+
+	// @route    /login/table
+	// @desc     User's Login Page FROM QR CODE LINK
+	// @access   Public
+	app.get("/login/table", function(req, res) {
+		if (req.query.id) {
+			var scannedId = req.query.id;
+			var idLetter = countUpperCaseChars(scannedId);
+		}
+		if (scannedId.length === 10 && idLetter === 5) {
+			tableNumber = scannedId;
+			req.flash('success_msg', 'Table number assigned. Please log in.');
+			req.flash('table_number', tableNumber);
+			res.redirect('/login');
+		} else {
+			req.flash('error_msg', 'Error..? Hacking huh..?');
+			res.redirect('/login');
+		}
 	});
 
-	// --- added by GG - 03/05-2:55pm
-	// this is to display customer orders form (app/orders/by-user)
-	app.get("/customer/orders/by-user", function(req, res) {
-		res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
-	});
 	// -- end of edits by GG
-	
-	// MAIN APP ROUTE 
+	// @route    /app
+	// @desc     Empty
+	// @access   Public
 	app.get('/app', isLogged, (req, res) => {
 		// This route is secured, used only to redirect user. (isLogged)
 	});
 };
+
+// Function to return how many capital letters in string. QR code security.
+function countUpperCaseChars(str) {
+	var count = 0,
+		len = str.length;
+	for (var i = 0; i < len; i++) {
+		if (/[A-Z]/.test(str.charAt(i))) count++;
+	}
+	return count;
+}

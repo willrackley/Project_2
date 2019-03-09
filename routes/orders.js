@@ -2,40 +2,35 @@
 const express = require('express');
 const db = require("../models");
 const router = express.Router();
-const { customerAuthenticated, managerAuthenticated, isLogged } = require('../config/auth');
-var FullOrders = [];
+const {
+	customerAuthenticated,
+	kitchenAuthenticated,
+	managerAuthenticated,
+	isLogged
+} = require('../config/auth');
 
-// Get all the orders
-router.get('/', (req, res) => {
-	db.Orders.findAll({}).then(results => {
-		res.json(results);
-		res.end();
-	}).catch(err => console.log(err));
-});
-	
-router.post('/add', (req, res) => {
-	db.Orders.create({
-		order_user_id: req.user.id,
-		total_price: req.body.total_price,
-		status: req.body.status,
-		comment: req.body.comment
+router.post('/add', customerAuthenticated, (req, res) => {
+	db.User.findAll({
+		attributes: ['table_loc'],
+		where: {
+			id: req.user.id
+		}
 	}).then(results => {
-		res.json(results);
-		res.end();
+		db.Orders.create({
+			order_user_id: req.user.id,
+			total_price: req.body.total_price,
+			status: req.body.status,
+			comment: req.body.comment,
+			order_table: results[0].table_loc
+		}).then(results => {
+			res.json(results);
+			res.end();
+		}).catch(err => console.log(err));
 	}).catch(err => console.log(err));
 });
 
-router.get('/detailed', (req, res) => {
-	db.detailOrders.findAll({}).then(results => {
-		res.json(results);
-		res.end();
-	}).catch(err => console.log(err));
-});
-
-router.post('/add/detailed', (req, res) => {
-	console.log(req.body);
+router.post('/add/detailed', customerAuthenticated, (req, res) => {
 	var totalPrice = (req.body.amount * req.body.price);
-	console.log(totalPrice);
 	db.detailOrders.create({
 		order_id: req.body.order_id,
 		product_id: req.body.id,
@@ -47,107 +42,77 @@ router.post('/add/detailed', (req, res) => {
 	}).catch(err => console.log(err));
 });
 
-// router.get('/kitchen', (req, res) => {  
-// 	var FullOrders = [];
-// 	var DetailOrders = [];
-	
-// 	db.Orders.findAll({}).then(results => {
-
-// 		for(var i=0; i < results.length; i++){
-// 			FullOrders.push(results[i].get({plain: true}));
-// 			FullOrders[i].detailProducts = [];
-// 		}
-		
-
-// 		db.detailOrders.findAll({}).then(data => {
-// 				for(var j=0; j < data.length; j++){
-// 					DetailOrders.push(data[j].get());
-// 				}
-
-// 		for (var x = 0; x < FullOrders.length; x++) {
-// 			for (var y =0; y < DetailOrders.length; y++) {
-// 				if (FullOrders[x].id === DetailOrders[y].order_id) {
-// 					FullOrders[x].detailProducts.push(DetailOrders[y]);
-// 				}
-// 			}
-// 		}
-
-// 		res.json(FullOrders);
-
-// 		});
-// 		});
-
-
-	// }).catch(err => console.log(err));
-//});
-
-// link: /app/orders/by-user
-router.get('/by-user/', (req, res) => {
+// @route    app/orders/by-user
+// @desc     Joined ALL USERS data with all orders
+// @access   Manager
+router.get('/by-user/', customerAuthenticated, (req, res) => {
 	db.User.findAll({
 		include: [{
 			model: db.Orders,
 			include: [{
 				model: db.detailOrders,
-					include: [{
-						model: db.Products,
-					}]
+				include: [{
+					model: db.Products,
+				}]
 			}]
-			
 		}]
 	}).then(users => {
-		
 		res.send(users);
 	});
 });
 
-
-// link: /app/orders/get-last
+// @route    app/orders/get-last
+// @desc     Joined Loged USERS who data with all orders
+// @access   Customer
 router.get('/get-last', customerAuthenticated, (req, res) => {
-	//console.log(req.user.id);
 	db.User.findAll({
 		where: {
 			id: req.user.id
 		},
 		include: [{
 			model: db.Orders,
-			order: '"createdAt" DESC', // ASC DESC
+			order: '"createdAt" DESC',
 			include: [{
 				model: db.detailOrders,
-					include: [{
-						model: db.Products,
-					}]
+				include: [{
+					model: db.Products,
+				}]
 			}]
-
 		}]
 	}).then(users => {
 		res.send(users);
 	});
 });
 
-router.get('/kitchen', (req, res) => {
+// @route    app/orders/kitchen
+// @desc     Joined orders data, sorted for kitchen
+// @access   Manager
+router.get('/kitchen', kitchenAuthenticated, (req, res) => {
 	db.Orders.findAll({
+		order: [
+			['createdAt', 'DESC']
+		],
 		include: [{
 			model: db.detailOrders,
-				include: [{
-					model: db.Products,
-				}]
+			include: [{
+				model: db.Products,
+			}]
 		}]
 	}).then(orders => {
 		res.send(orders);
 	});
 });
 
-// PUT route for updating posts
-router.put("/", function(req, res) {
-    db.Orders.update(
-      req.body,
-      {
-        where: {
-          id: req.body.id
-        }
-      }).then(function(orders) {
-      res.json(orders);
-    });
-  });
-
+// @route    app/orders
+// @desc     Update route, to update order STATUS
+// @access   Manager
+router.put("/", kitchenAuthenticated, function(req, res) {
+	db.Orders.update(req.body, {
+		where: {
+			id: req.body.id
+		}
+	}).then(function(orders) {
+		res.json(orders);
+	});
+});
 module.exports = router;

@@ -11,6 +11,7 @@ If you have any problems, question, ideas, or suggestions please contact us how 
 
 Will Rackley - willrackley65@gmail.com
 Natosha Martin - nmsuri28@gmail.com
+Justas Lauzinskas - justaslau@gmail.com
 
 **********Deployed Heroku**********
 

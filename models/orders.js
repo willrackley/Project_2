@@ -6,6 +6,10 @@ module.exports = function(sequelize, DataTypes){
             primaryKey: true
         },
         order_user_id: DataTypes.UUID,
+        order_table: {
+            type: DataTypes.STRING,
+            defaultValue: 0
+        },
         total_price: DataTypes.DOUBLE,
         status: DataTypes.STRING,
         comment: DataTypes.STRING

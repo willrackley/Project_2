@@ -71,6 +71,8 @@ var menuItems;
         var cardHeader = $('<div class="card-header kitchenCardHeader w-100">');
         var cardBody = $('<div class="card-body p-3">');
         var status = $('<div class="mt-1 font-weight-bold h4">');
+        var table = $('<div class="mt-1 font-weight-bold h6">');
+        table.text('TABLE #' + orderData.order_table);
         status.text('STATUS: ' + orderData.status);
         var btnDiv = $('<div class="text-center">')
         var redBtn = $('<button class="btn btn-danger RedButton mx-1 mt-2">');
@@ -94,6 +96,7 @@ var menuItems;
         }
         cardBody.text(ordersColumn.join(['\xa0 \xa0 \xa0']) + '\xa0 \xa0 \xa0' + 'special request: '+ orderData.comment);
         status.appendTo(cardHeader);
+        table.appendTo(cardHeader);
         redBtn.appendTo(btnDiv);
         yellowBtn.appendTo(btnDiv);
         greenBtn.appendTo(btnDiv);
