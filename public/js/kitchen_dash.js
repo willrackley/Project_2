@@ -57,7 +57,7 @@ $(document).ready(function(){
             ordersColumn.push(quantity);
             ordersColumn.push(product);
         }
-        cardBody.text(ordersColumn.join(['\xa0 \xa0']));
+        cardBody.text(ordersColumn.join(['\xa0 \xa0 \xa0']) + '\xa0 \xa0 \xa0' + 'special request: '+ orderData.comment);
         status.appendTo(cardHeader);
         redBtn.appendTo(btnDiv);
         yellowBtn.appendTo(btnDiv);
