@@ -58,7 +58,6 @@ router.post('/categories/add', managerAuthenticated, (req, res) => {
 // @route    app/products/add
 // @desc     Add form input (product) in database
 // @access   Only Manager
-// @status   Not finished needs validations and security check
 router.post('/add', managerAuthenticated, (req, res) => {
 	db.Products.create({
 		name: req.body.itemName,
@@ -76,10 +75,9 @@ router.post('/add', managerAuthenticated, (req, res) => {
 // @route    app/products/edit
 // @desc     Edit or delete product info in database
 // @access   Only Manager
-// @status   Not finished needs validations and security check
 router.post('/edit', managerAuthenticated, (req, res) => {
 	if (req.body.action === "update") {
-		 db.Products.update({
+		db.Products.update({
 			name: req.body.itemName,
 			description: req.body.itemDecription,
 			regular_price: req.body.regularPrice,
@@ -90,7 +88,7 @@ router.post('/edit', managerAuthenticated, (req, res) => {
 			where: {
 				id: req.body.productId
 			}
-		}).then (results => {
+		}).then(results => {
 			req.flash('success_msg', 'Product successfully updated');
 			res.redirect('/app/dashboard/manager/edit-menu-item');
 		});
@@ -106,6 +104,9 @@ router.post('/edit', managerAuthenticated, (req, res) => {
 	}
 });
 
+// @route    app/products/by-category
+// @desc     Joined Categories And Categories
+// @access   Public
 router.get('/by-category', (req, res) => {
 	db.Products.findAll({
 		include: [{
@@ -115,7 +116,5 @@ router.get('/by-category', (req, res) => {
 		res.send(orders);
 	});
 });
-
-
 
 module.exports = router;
