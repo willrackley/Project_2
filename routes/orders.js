@@ -78,7 +78,7 @@ router.post('/add/detailed', (req, res) => {
 
 
 	// }).catch(err => console.log(err));
-});
+//});
 
 
 
