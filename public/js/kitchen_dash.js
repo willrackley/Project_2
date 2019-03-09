@@ -21,7 +21,7 @@ $(document).ready(function(){
     function createOrderDiv(orderData){
         //console.log('made it')
         ordersColumn = [];
-        var card = $('<div class="card menuCards mb-5">');
+        var card = $('<div class="card kitchenOrderCards mb-5">');
         var cardHeader = $('<div class="card-header kitchenCardHeader w-100">');
         var cardBody = $('<div class="card-body p-3">');
         var status = $('<div class="mt-1">');
