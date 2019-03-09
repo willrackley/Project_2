@@ -39,4 +39,6 @@ db.User.hasMany(db.Orders, {foreignKey: 'order_user_id'});
 db.Orders.hasMany(db.detailOrders, {foreignKey: 'order_id'});
 db.detailOrders.belongsTo(db.Products, {foreignKey: 'product_id'});
 
+db.Products.belongsTo(db.productCategories, {foreignKey: 'category_id'} )
+
 module.exports = db;

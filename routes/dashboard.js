@@ -39,6 +39,7 @@ router.get('/customer', customerAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../public/userProfile.html"));
 });
 
+
 // --- added by GG - 03/05-2:55pm
 // this is to display customer orders form (app/orders/by-user)
 //router.get("/customer/orders/by-user", function(req, res) {
@@ -46,6 +47,7 @@ router.get("/customer/orders/by-user", customerAuthenticated, (req, res) => {
 	res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
 });
 // -- end of edits by GG
+
 
 // FUTURE KITCHEN ROUTES - all routes associated with kitchen
 // router.get('/kitchen', customerAuthenticated, (req, res) => {
