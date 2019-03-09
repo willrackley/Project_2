@@ -29,12 +29,14 @@ module.exports = function(app) {
 	app.get("/manager-dashboard", function(req, res) {
 		res.sendFile(path.join(__dirname, "../public/managerDashboard.html"));
 	});
+
 	// --- added by GG - 03/05-2:55pm
-	// this is to display customer orders form (app/orders)
-	app.get("/customer/view-orders", function(req, res) {
+	// this is to display customer orders form (app/orders/by-user)
+	app.get("/customer/orders/by-user", function(req, res) {
 		res.sendFile(path.join(__dirname, "../public/customerOrders.html"));
 	});
 	// -- end of edits by GG
+	
 	// MAIN APP ROUTE 
 	app.get('/app', isLogged, (req, res) => {
 		// This route is secured, used only to redirect user. (isLogged)
