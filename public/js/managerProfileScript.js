@@ -88,11 +88,11 @@ var menuItems;
         cardHeader.text('ORDER: ' + orderData.id);
         for(var i=0; i < orderData.detailOrders.length; i++ ){
             var quantity = orderData.detailOrders[i].quantity
-            var product = orderData.detailOrders[i].Product.name
+            var product = orderData.detailOrders[i].Product.name 
             ordersColumn.push(quantity);
             ordersColumn.push(product);
         }
-        cardBody.text(ordersColumn.join(['\xa0 \xa0']));
+        cardBody.text(ordersColumn.join(['\xa0 \xa0 \xa0']) + '\xa0 \xa0 \xa0' + 'special request: '+ orderData.comment);
         status.appendTo(cardHeader);
         redBtn.appendTo(btnDiv);
         yellowBtn.appendTo(btnDiv);
