@@ -5,6 +5,18 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const router = express.Router();
 
+function assignTableId(idFromForm) {
+	if (idFromForm === 'A1A2A3A4A5') {
+		return 'B1'
+	} else if (idFromForm === 'B1B2B3B4B5') {
+		return 'B2'
+	} else if (idFromForm === 'C1C2C3C4C5') {
+		return 'B3'
+	} else {
+		return 0;
+	}
+}
+
 // Router just for testing to see all users
 router.get('/', (req, res) => {
 	db.User.findAll({}).then(results => {
@@ -87,11 +99,31 @@ router.post('/register', (req, res) => {
 });
 // Login route app/users/login
 router.post('/login', (req, res, next) => {
-	passport.authenticate('local', {
-		successRedirect: '/app/dashboard',
-		failureRedirect: '/login',
-		failureFlash: true
-	})(req, res, next);
+	passport.authenticate('local', function(err, user, info) {
+		if (err) { return next(err); }
+		if (!user) {
+			req.flash('error', info.message);
+			req.flash('table_number', req.body.qrtnrtbl)
+			return res.redirect('/login'); 
+		}
+		req.logIn(user, function(err) {
+		  if (err) { return next(err); }
+		  if (user.user_group === 'customer' && req.body.qrtnrtbl !== '') {
+			var tableNumber = assignTableId(req.body.qrtnrtbl);
+			db.User.update({
+				table_loc: tableNumber,
+			}, {
+				where: {
+					id: req.user.id
+				}
+			}).then (results => {
+				return res.redirect('/app/dashboard/customer');
+			});
+		  } else {
+			return res.redirect('/app/dashboard');
+		  }
+		});
+	  })(req, res, next);
 });
 
 router.get('/logout', function(req, res) {
