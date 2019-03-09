@@ -4,17 +4,17 @@ $(document).ready(function(){
     function getOrders(){
         $.get('/app/orders/by-user', function(data){
             orderData = data;
-            initializeTableData();
+            initializeOrderData();
         });
     }
 
-    function initializeTableData(){
+    function initializeOrderData(){
        var ordersToAdd = [];
        ordersColumn = [];
        for (var i = 0; i <orderData.length; i++) {
-           ordersToAdd.push(createTableData(orderData[i]));
+           ordersToAdd.push(createOrderDiv(orderData[i]));
         }
-        $('#menuContainer').append(ordersToAdd);
+        $('#orderContainer').append(ordersToAdd);
     }
 
     function createTableData(orderData){
