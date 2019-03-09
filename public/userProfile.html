@@ -14,7 +14,7 @@
   <!-- font awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 </head>
 
 <body>
@@ -44,18 +44,8 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <h3 class="display-4 text-dark mb-3">Ready to order? </h3>
-                <!-- <a href="#"><h3><span class="badge ml-1 p-3" id="userScanQRcode">Scan QR code </span></h3></a> -->
             </div>
             <div class="col-md-6 col-sm-12">
-                <form>
-                    <div class="form-group">
-                        <label class="control-label"></label>
-                        <div class="input-group">
-                            <input id="addressInput" placeholder="Enter your address" type="text" class="form-control">
-                            <button class="input-group-btn btn inline" id="restaurantSearch">Find Restaurant </button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>   
@@ -88,20 +78,27 @@
                             <div class="" id="total"></div>
                         </div>
                     </div>
-                    <form action="/charge" method="POST" id="chargeForm">
-                        <script
-                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="pk_test_o24ghcoulY4sQIVbTDu934ow"
-                          data-amount=""
-                          data-name="Easy Eats"
-                          data-description="Total Due"
-                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                          data-locale="auto">
-                        </script>
-                        <input type="hidden" name="chargeAmount">
-                    </form>
-                    <button class="btn" id="testBtn">test</button>
+                    <button class="btn btn-info" id="testBtn" data-toggle="modal" data-target="#paymentModal">Pay</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="paymentModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center w-100">Easy<i class="fas fa-hamburger"></i>Eats</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body w-100 text-center">
+                <p>Payment successful</p>
+                <p>Thanks, Feel free to order additional eats!</p>
+            </div>
+            <div class="modal-footer">
+            </div>
             </div>
         </div>
     </div>

@@ -106,6 +106,16 @@ router.post('/edit', managerAuthenticated, (req, res) => {
 	}
 });
 
+router.get('/by-category', (req, res) => {
+	db.Products.findAll({
+		include: [{
+			model: db.productCategories,
+		}]
+	}).then(orders => {
+		res.send(orders);
+	});
+});
+
 
 
 module.exports = router;

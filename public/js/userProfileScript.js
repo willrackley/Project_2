@@ -48,7 +48,7 @@ $(document).ready(function(){
     //creates the rows that are going to be displayed in menu section
     function createNewRow(menuItem) {
         var card = $('<div class="card menuCards mb-5">');
-        var cardHeader = $('<div class="card-header w-100">');
+        var cardHeader = $('<div class="card-header cardHeads w-100">');
         cardHeader.text(menuItem.name + " " + "|" + " " + menuItem.discount_price);
         var cardBody = $('<div>');
         cardBody.addClass('card-body');
@@ -202,6 +202,12 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '#testBtn', function(){
+
+        $('#orderHeader').hide();
+        $('#priceTotal').hide();
+        $('#reviewOrder').hide();
+        $('#comment').hide();
+        $('#orderSection').hide();
         var costIndex = postedCost.length - 1;
 
         var createOrder = {
