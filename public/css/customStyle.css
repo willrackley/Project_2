@@ -19,6 +19,11 @@ body {
     font-family: 'Fugaz One', cursive;
     letter-spacing: 5px;
 }
+.modal-title {
+    font-family: 'Fugaz One', cursive;
+    letter-spacing: 5px;
+}
+
 .fas {
     color: #F5DC47;
 }
@@ -30,8 +35,6 @@ body {
 .blackNav {
     background: #000000;
 }
-
-
 
 .nav-item a:hover {
     color: #F5DC47 !important;
