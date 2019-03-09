@@ -14,14 +14,22 @@ router.get('/', (req, res) => {
 });
 	
 router.post('/add', (req, res) => {
-	db.Orders.create({
-		order_user_id: req.user.id,
-		total_price: req.body.total_price,
-		status: req.body.status,
-		comment: req.body.comment
+	db.User.findAll({
+		attributes: ['table_loc'],
+		where: {
+			id: req.user.id
+		}
 	}).then(results => {
-		res.json(results);
-		res.end();
+		db.Orders.create({
+			order_user_id: req.user.id,
+			total_price: req.body.total_price,
+			status: req.body.status,
+			comment: req.body.comment,
+			order_table: results[0].table_loc
+		}).then(results => {
+			res.json(results);
+			res.end();
+		}).catch(err => console.log(err));
 	}).catch(err => console.log(err));
 });
 
@@ -33,9 +41,7 @@ router.get('/detailed', (req, res) => {
 });
 
 router.post('/add/detailed', (req, res) => {
-	console.log(req.body);
 	var totalPrice = (req.body.amount * req.body.price);
-	console.log(totalPrice);
 	db.detailOrders.create({
 		order_id: req.body.order_id,
 		product_id: req.body.id,
@@ -126,6 +132,7 @@ router.get('/get-last', customerAuthenticated, (req, res) => {
 
 router.get('/kitchen', (req, res) => {
 	db.Orders.findAll({
+		order: [['createdAt', 'DESC']],
 		include: [{
 			model: db.detailOrders,
 				include: [{

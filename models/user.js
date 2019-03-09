@@ -6,6 +6,10 @@ module.exports = function(sequelize, DataTypes){
             primaryKey: true
           },
         balance: DataTypes.DOUBLE,
+        table_loc: {
+            type: DataTypes.STRING,
+            defaultValue: '0'
+        },
         first_name: DataTypes.STRING,
         password: DataTypes.STRING,
         email: DataTypes.STRING,
