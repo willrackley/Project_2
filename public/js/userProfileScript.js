@@ -215,6 +215,7 @@ $(document).ready(function(){
             status: "pending",
             comment: $('#commentInput').val()
         }
-        postOrder(createOrder, cart);  
+        postOrder(createOrder, cart); 
+        //for pushing 
     });
 });

@@ -26,10 +26,11 @@ $(document).ready(function(){
         var card = $('<div class="card kitchenOrderCards mb-5">');
         var cardHeader = $('<div class="card-header kitchenCardHeader w-100">');
         var cardBody = $('<div class="card-body p-3">');
-        var status = $('<div class="mt-1">');
+        var status = $('<div class="mt-1 font-weight-bold h4">');
         var table = $('<div class="mt-1 font-weight-bold h6">');
         table.text('TABLE #' + orderData.order_table);
-        status.text('STATUS: pending');
+        status.attr('id','status'+orderData.id);
+        status.text('STATUS: ' + orderData.status);
         var btnDiv = $('<div class="text-center">')
         var redBtn = $('<button class="btn btn-danger RedButton mx-1 mt-2">');
         redBtn.attr('id', 'kitchen-action');
@@ -71,7 +72,7 @@ $(document).ready(function(){
           data: newOrder
         })
           .then(function() {
-            $('#status' + $(this).val()).text("STATUS: " + $(this).text());
+           // $('#status' + $(this).val()).text("STATUS: " + $(this).text());
           });
       }
 
@@ -85,7 +86,7 @@ $(document).ready(function(){
             status: $(this).text(),
             comment: $(this).attr('comment')
         }
-
+        $('#status' + $(this).val()).text($(this).text());
         updateOrder(newOrder);
 
     });
