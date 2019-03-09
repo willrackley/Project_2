@@ -5,7 +5,9 @@ $(document).ready(function(){
     function getOrders(){
         $.get('/app/orders/kitchen', function(data){
             orderData = data;
+
             console.log(orderData);
+
             initializeOrderData();
         });
     }
@@ -13,7 +15,7 @@ $(document).ready(function(){
     function initializeOrderData(){
        var ordersToAdd = [];
        ordersColumn = [];
-       for (var i = 0; i < orderData.length; i++) {
+       for (var i = 0; i <orderData.length; i++) {
            ordersToAdd.push(createOrderDiv(orderData[i]));
         }
         $('#orderContainer').append(ordersToAdd);

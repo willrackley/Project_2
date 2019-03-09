@@ -2,6 +2,7 @@
 const express = require('express');
 const db = require("../models");
 const router = express.Router();
+const { customerAuthenticated, managerAuthenticated, isLogged } = require('../config/auth');
 var FullOrders = [];
 
 // Get all the orders
@@ -91,32 +92,37 @@ router.get('/by-user/', (req, res) => {
 						model: db.Products,
 					}]
 			}]
-			//where: {order_user_id:  req.User.id }
+			
 		}]
 	}).then(users => {
-		//console.log(req.User.id); 
+		
 		res.send(users);
 	});
 });
 
-// router.get('/by-user', (req, res) => {
 
-// 	db.User.findAll({
-// 		include: [{
-// 			model: db.Orders,
-// 			include: [{
-// 				model: db.detailOrders,
-// 					include: [{
-// 						model: db.Products,
-// 					}]
-// 			}]
-// 			//where: {order_user_id:  req.User.id }
-// 		}]
-// 	}).then(users => {
-// 		//console.log(req.User.id); 
-// 		res.send(users);
-// 	});
-// });
+// link: /app/orders/get-last
+router.get('/get-last', customerAuthenticated, (req, res) => {
+	//console.log(req.user.id);
+	db.User.findAll({
+		where: {
+			id: req.user.id
+		},
+		include: [{
+			model: db.Orders,
+			order: '"createdAt" DESC', // ASC DESC
+			include: [{
+				model: db.detailOrders,
+					include: [{
+						model: db.Products,
+					}]
+			}]
+
+		}]
+	}).then(users => {
+		res.send(users);
+	});
+});
 
 router.get('/kitchen', (req, res) => {
 	db.Orders.findAll({
