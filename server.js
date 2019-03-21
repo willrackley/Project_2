@@ -59,7 +59,7 @@ require("./routes/html-routes.js")(app);
 // Syncing our sequelize models and then starting our Express app
 // force set to true, means that we drop our tables every time we run server
 db.sequelize.sync({
-	//keep data in db
+	//keep data in database
 	force: false
 }).then(function() {
 	app.listen(PORT, function() {
