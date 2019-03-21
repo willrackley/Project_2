@@ -23,3 +23,21 @@ Justas Lauzinskas - justaslau@gmail.com
 
 ### Deployed Heroku Domain
 [click here to try Easy Eats web application](https://shrouded-waters-91830.herokuapp.com/)
+
+## QR Code Scanning
+
+Currently we have 3 tables at our restaurant. You can order food by scanning one of the QR Codes below:
+
+### Table A1
+
+![Table A1](/images/TableA1.png) 
+
+### Table B1
+
+![Table B1](/images/TableB1.png)
+
+### Table C1
+
+![Table C1](/images/TableC1.png)
+
+
