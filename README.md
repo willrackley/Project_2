@@ -47,9 +47,9 @@ To log in as a manager or kitchen staff you will need to use the user informatio
 ### Contact
 If you have any problems, question, ideas, or suggestions please contact us how you see fit:
 
-Will Rackley - willrackley65@gmail.com
-Natosha Martin - nmsuri28@gmail.com
-Justas Lauzinskas - justaslau@gmail.com
+* Will Rackley - willrackley65@gmail.com
+* Natosha Martin - nmsuri28@gmail.com
+* Justas Lauzinskas - justaslau@gmail.com
 
 ### Deployed Heroku Domain
 [click here to try Easy Eats web application](https://shrouded-waters-91830.herokuapp.com/)
