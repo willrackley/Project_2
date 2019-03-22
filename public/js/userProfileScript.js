@@ -205,7 +205,7 @@ $(document).ready(function(){
         $('#reviewOrder').hide();
         $('#comment').hide();
         $('#orderSection').hide();
-        cart = [];
+        
         var costIndex = postedCost.length - 1;
 
         var createOrder = {
@@ -215,5 +215,6 @@ $(document).ready(function(){
         }
         postOrder(createOrder, cart); 
         //for pushing 
+        cart = [];
     });
 });
