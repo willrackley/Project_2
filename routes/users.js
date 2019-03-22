@@ -137,4 +137,13 @@ router.get('/logout', function(req, res) {
 	res.redirect('/login');
 });
 
+// @route    app/users/status
+// @desc     Check if Logged In
+// @access   Public
+router.get('/status', function(req, res) {
+	if (req.user) {
+		res.json({ logInStatus: true, name: req.user.first_name })
+	} else { res.json({ logInStatus: false })}
+});
+
 module.exports = router;
