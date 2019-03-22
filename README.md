@@ -14,16 +14,6 @@ The restaurant has two of their own log in authentication with the Easy Eats app
 The kitchen's dashboard dislpays all current orders. The kitchen has the ability to change the status of each order from pending to in process, completed, or canceled.
 
 
-### Contact
-If you have any problems, question, ideas, or suggestions please contact us how you see fit:
-
-Will Rackley - willrackley65@gmail.com
-Natosha Martin - nmsuri28@gmail.com
-Justas Lauzinskas - justaslau@gmail.com
-
-### Deployed Heroku Domain
-[click here to try Easy Eats web application](https://shrouded-waters-91830.herokuapp.com/)
-
 ## QR Code Scanning
 
 Currently we have 3 tables at our restaurant. You can order food by scanning one of the QR Codes below:
@@ -39,5 +29,29 @@ Currently we have 3 tables at our restaurant. You can order food by scanning one
 ### Table C1
 
 ![Table C1](/images/TableC1.png)
+
+
+## Logging In 
+To log in as a manager or kitchen staff you will need to use the user information prodived.
+(These sign ins are provided to the restaurant manager and kitchen staff by Easy Eats)
+
+### For a manager
+* email: manager@gmail.com
+* password: password
+
+### For Kitchen Staff
+* email: kitchen@gmail.com
+* password: password
+
+
+### Contact
+If you have any problems, question, ideas, or suggestions please contact us how you see fit:
+
+Will Rackley - willrackley65@gmail.com
+Natosha Martin - nmsuri28@gmail.com
+Justas Lauzinskas - justaslau@gmail.com
+
+### Deployed Heroku Domain
+[click here to try Easy Eats web application](https://shrouded-waters-91830.herokuapp.com/)
 
 
