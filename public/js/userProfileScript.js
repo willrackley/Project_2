@@ -216,5 +216,6 @@ $(document).ready(function(){
         postOrder(createOrder, cart); 
         //for pushing 
         cart = [];
+        $('#commentInput').val('')
     });
 });
