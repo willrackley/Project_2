@@ -58,7 +58,6 @@ $(document).ready(function(){
         var addBtn = $('<button>');
         addBtn.addClass("addBtn");
         addBtn.attr("itemName", menuItem.name);
-        console.log("testing id " + menuItem.id)
         addBtn.attr("key", menuItem.id);
         addBtn.attr("itemPrice", menuItem.discount_price);
         var addSymbol = $('<i class="fas fa-plus">');
@@ -77,7 +76,6 @@ $(document).ready(function(){
     function getMenu() {
         $.get('/app/products', function(data) {
             menuItems = data;
-            console.log(menuItems);
             initializeRows();
         });
     }
@@ -139,6 +137,7 @@ $(document).ready(function(){
     //click event that adds menu item to the users order
     $(document).on('click', '.addBtn', function(){
         $('#orderHeader').show();
+        $('#orderSection').show();
         $('#reviewOrder').show();
         $('#priceTotal').hide();
         $('#comment').show();
@@ -162,17 +161,15 @@ $(document).ready(function(){
         } else {
             var newItem = true;
             for(var i=0; i < cart.length; i++){
-                console.log("actual CART id = " + cart[i].id + " TYPE " + (typeof cart[i].id)  );
-                console.log("actual CHOICE id = " + itemChoice.id + " TYPE " +(typeof itemChoice.id ) );
+                
                 if(cart[i].id === itemChoice.id){
                     newItem = false;
                     cart[i].amount+= itemChoice.amount;
-                    console.log('already on cart');
+                    
                 } 
             }
             if(newItem) cart.push(itemChoice);
         }
-        console.log(cart);
         displayOrders();
     }); 
 
@@ -184,7 +181,7 @@ $(document).ready(function(){
     
         $(deleteKeySelector).remove();
         for(var i=0; i < cart.length; i++){
-            if(cart[i].id === parseInt(deleteKey)){
+            if(cart[i].id === deleteKey){
                 cart.splice(i,1); 
             }
         } 
@@ -208,6 +205,7 @@ $(document).ready(function(){
         $('#reviewOrder').hide();
         $('#comment').hide();
         $('#orderSection').hide();
+        cart = [];
         var costIndex = postedCost.length - 1;
 
         var createOrder = {
