@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 var menuItems;
 
-    //function that grabs all api information
+    //function that grabs all products api information
     function getMenu() {
         $.get('/app/products/by-category', function(data) {
             menuItems = data;
