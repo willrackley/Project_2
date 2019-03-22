@@ -32,7 +32,7 @@ Currently we have 3 tables at our restaurant. You can order food by scanning one
 
 
 ## Logging In 
-To log in as a manager or kitchen staff you will need to use the user information prodived.
+To log in as a manager or kitchen staff you will need to use the user information provided.
 (These sign ins are provided to the restaurant manager and kitchen staff by Easy Eats)
 
 ### For a manager
