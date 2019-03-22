@@ -19,4 +19,11 @@ $("#sign-up").submit(function(event) {
     });
 });
 
-//$(".login-info-messages").text(success_msg);
+$(window).load(function(){ 
+    $.get('/app/users/status', function(data) {
+        if (data.logInStatus === true) {
+            $('.signupLink').hide();
+            $('.loginLink').text(data.name + ' Dashboard');
+       }
+    });
+});
